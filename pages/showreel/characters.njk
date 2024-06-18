@@ -1,0 +1,75 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <!-- Row for character and non-speaking character tables -->
+  <div class='row tableFixHead3' id='tabhead'>
+    <!-- Character table -->
+    <div class='col-md-10'>
+      <table class='table-bordered table-sm table-dark table-grid' id='tab-chars'>
+        <tbody>
+          <!-- Loop through characters, displaying three in each row -->
+          {% for i in range(0, characters.length, 3) -%}
+            <tr>
+              <!-- Display three characters in each row -->
+              {% for num in range(0, 3) -%}
+                {% if characters[i + num] %}
+                  <td class='data-right'>
+                    <!-- Button to edit a character -->
+                    <button type='button' class='btn-edit-character' value='{{characters[i + num][0]}}'>
+                      {{characters[i + num][0]}}
+                    </button>
+                  </td>
+                  <!-- Display character information -->
+                  <td class='data-left'>
+                    {{characters[i + num][1]}}
+                  </td>
+                  <!-- Add spacing if not the last character in the row -->
+                  {% if num !== 2 %}
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- Non-speaking characters section -->
+    <div class='col-md-2' style='background: blue; padding: 20px;'>
+      <div class='row'>
+        <!-- Header for non-speaking characters section -->
+        <p style='text-align:center; color:white;'>NON-SPEAKING CHARACTERS</p>
+      </div>
+      <div class='row' style='text-align: center;'>
+        <!-- Input for adding non-speaking characters -->
+        <br>
+        <input type="text" id="input-add-character" name="input-add-character" size='20' style='color: black;'>
+      </div>
+      <div class='row'>
+        <!-- Button to add non-speaking characters -->
+        <button class='btn-add-character'>Add Non-Speaking Character</button>
+      </div>
+      <div class='row'>
+        <br>
+        <!-- Table for displaying non-speaking characters and delete button -->
+        <table class='table-bordered table-sm table-dark table-grid' id='tab_non'>
+          {% for i in range(0, nonSpeakers.length) -%}
+            <tr>
+              <!-- Display non-speaking character name -->
+              <td class='data-left'>
+                {{nonSpeakers[i]}}
+              </td>
+              <!-- Button to delete non-speaking character -->
+              <td>
+                <button class='btn-delete-character' value='{{nonSpeakers[i]}}'>Delete</button>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <br>
+      </div>
+    </div>
+  </div>
+  <!-- Include JavaScript files -->
+  <script src='../js/showreel/parent.js'></script>
+  <script src='../js/showreel/characters.js'></script>
+{% endblock %}

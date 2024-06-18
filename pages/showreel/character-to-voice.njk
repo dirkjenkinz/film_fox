@@ -1,0 +1,93 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <!-- Row for character and voice tables -->
+  <div class='row' id='tabhead'>
+    <!-- Hidden paragraph for script information -->
+
+    <div class='col-md-5 tableFixHead3' id='table1'>
+      <div class="row">
+        <div class='col-md-4 header-ctv'>
+          Character
+        </div>
+        <div class='col-md-5 header-ctv'>
+          Voice
+        </div>
+        <div class='col-md-2'>
+          <audio id='master-play' style='width: 100%;'>
+            <source src='' type='audio/mpeg'>
+          </audio>
+        </div>
+      </div>
+
+      <!-- Loop through characters to display -->
+      {% for i in range(0, characters.length) -%}
+        <div class='row data-ctv'>
+          <div class='col-md-4' id="char_{{i}}">
+            {{characters[i][0]}}
+          </div>
+          <div class='col-md-5' id="char_{{i}}">
+            <select name="voices_{{i}}" id="voices_{{i}}" class='voice-sel'>
+              <!-- Loop through voice data to populate dropdown -->
+              {% for j in range(0, voice_data.length) -%}
+                {% if characters[i][1] == voice_data[j][0] %}
+                  <option value="{{voice_data[j][0]}}" selected="selected">
+                    {{voice_data[j][0]}}
+                  </option>
+                {% else %}
+                  <option value="{{voice_data[j][0]}}">
+                    {{voice_data[j][0]}}
+                  </option>
+                {% endif %}
+              {%- endfor %}
+            </select>
+          </div>
+          <div class='col-md-3'>
+            <button class='btn-play-sample' value='{{characters[i][2]}}'>Sample</button>
+          </div>
+        </div>
+      {%- endfor %}
+    </div>
+
+    <div class='col-md-7 tableFixHead3'>
+      <div class='row'>
+        <div class='col-md-2 header-ctv'>Voice</div>
+        <div class='col-md-2 header-ctv'>Description</div>
+        <div class='col-md-1 header-ctv'>M/F</div>
+        <div class='col-md-2 header-ctv'>Accent</div>
+        <div class='col-md-2 header-ctv'>Age</div>
+        <div class='col-md-2'>&nbsp;</div>
+      </div>
+      {% for i in range(1, voice_data.length) -%}
+        <div class='row data-ctv'>
+          <div class='col-md-2'>
+            {% if voice_data[i][7] === 'yes'%}
+              {{voice_data[i][0]}}
+            {% else %}
+              {{voice_data[i][0]}}
+            {% endif %}
+          </div>
+          <div class='col-md-2'>
+            {{voice_data[i][3]}}
+          </div>
+          <div class='col-md-1' id="voice_gender_{{i}}">
+            {{voice_data[i][4]}}
+          </div>
+          <div class='col-md-2' id="voice_accent_{{i}}">
+            {{voice_data[i][5]}}
+          </div>
+          <div class='col-md-2' id="voice_age_{{i}}">
+            {{voice_data[i][6]}}
+          </div>
+          <!-- Button for playing a sample -->
+          <div class='col-md-2'>
+            <button class='btn-play-sample' value='{{voice_data[i][2]}}'>Sample</button>
+          </div>
+        </div>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <!-- Include JavaScript files -->
+  <script src='../js/showreel/parent.js'></script>
+  <script src='../js/showreel/character-to-voice.js'></script>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <!-- Search bar and Cancel & Go Back button -->
+  <div class='row'>
+    <div class='col-md-8' style='color:black;'>
+      <input type='text' id='search' name='search' size='20' value='{{searchString}}'>
+      Search
+    </div>
+    <div class='col-md-4' style='margin-top: 4px;'>
+      <button class='btn-cancel'>Cancel & Go Back</button>
+    </div>
+  </div>
+
+  <!-- Two sections for UNUSED IMAGES and USED IMAGES -->
+  <div class='row'>
+    <div class='col-md-6' style='text-align: center; background:green; padding:6px; border: black 6px solid;'>UNUSED IMAGES</div>
+    <div class='col-md-6' style='text-align: center; background:green; padding:6px; border: black 6px solid;'>USED IMAGES</div>
+  </div>
+
+  <!-- Table header and data for both UNUSED and USED images -->
+  <div class='row tableFixHead' id='tabhead'>
+    <div class='col-md-6'>
+      <!-- Hidden information related to the page -->
+      <p id='caller' hidden='hidden'>{{caller}}</p>
+      <p id='used-size' hidden="hidden">{{used.length}}</p>
+      <p id='unused-size' hidden="hidden">{{unused.length}}</p>
+
+      <!-- Table for UNUSED images -->
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_img_unused'>
+        <tbody id='tblBody1'>
+          {% for i in range(0, unused.length, 2) -%}
+            <tr id='unused-{{i}}' class='unused-item'>
+              {% for num in range(0, 2) -%}
+                {% if unused[i + num][0] %}
+                  <!-- Display UNUSED image or video -->
+                  <td class='data-left' id='unused-image-{{i + num}}'>
+                    {% if unused[i + num][1] === 'movie' %}
+                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                        <source src='../data/{{title}}/vision/images/{{unused[i + num][0]}}' type='video/mp4'>
+                      </video>
+                    {% else %}
+                      <img width='240' height='135' src='../data/{{title}}/vision/images/{{unused[i + num][0]}}' id='img_{{i + num}}' class='img' alt='unused[i + num][0]'>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            <!-- Button to select UNUSED image and display its name -->
+            <tr class='unused-select'>
+              {% for num in range(0, 2) -%}
+                {% if unused[i + num][0] %}
+                  <td class='data-left' id='unused-sel-{{i + num}}'>
+                    <button class='btn-select' id='btn-unused-{{i + num}}' value='{{unused[i + num][0]}}'>
+                      Select
+                    </button>
+                    <p>
+                      {{unused[i + num][0].substring(0,28)}}
+                    </p>
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class='col-md-6'>
+      <!-- Table for USED images -->
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_img'>
+        <tbody id='tblBody2'>
+          {% for i in range(0, used.length, 2) -%}
+            <tr id='used-{{i}}' class='used-item'>
+              {% for num in range(0, 2) -%}
+                {% if used[i + num][0] %}
+                  <!-- Display USED image or video -->
+                  <td class='data-left' id='used-image-{{i + num}}'>
+                    {% if used[i + num][1] === 'movie' %}
+                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                        <source src='../data/{{title}}/vision/images/{{used[i + num][0]}}' type='video/mp4'>
+                      </video>
+                    {% else %}
+                      <img width='240' height='135' src='../data/{{title}}/vision/images/{{used[i + num][0]}}' id='img_{{i + num}}' class='img' alt='used[i + num][0]'>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            <!-- Button to select USED image and display its name -->
+            <tr class='used-select'>
+              {% for num in range(0, 2) -%}
+                {% if used[i + num][0] %}
+                  <td class='data-left' id='used-sel-{{i + num}}'>
+                    <button class='btn-select' id='btn-used-{{i + num}}' value='{{used[i + num][0]}}'>
+                      Select
+                    </button>
+                    <p>
+                      {{used[i + num][0].substring(0,28)}}
+                    </p>
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Including necessary JavaScript files -->
+  <script src='../js/showreel/parent.js'></script>
+  <script src='../js/showreel/gallery.js'></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'paperwork/paperwork.njk' %}
+{% block page %}
+  <!-- Row for displaying credits -->
+  <div class='row top'>
+    <!-- Empty column for spacing -->
+    <div class='col-md-1'></div>
+    <!-- Main content column -->
+    <div class='col-md-9'>
+      <!-- Table for credits information -->
+      <table id='credits'>
+        <tbody>
+          <!-- Title row -->
+          <tr>
+            <!-- Header for title -->
+            <th class='table-header'>Title:</th>
+            <!-- Input field for title -->
+            <td style='width: 80%;'><input type='text' class='input-credit' id='input-title' name='title' size='70' value='{{credits.title}}'></td>
+          </tr>
+          <!-- Written by row -->
+          <tr>
+            <!-- Header for writer -->
+            <th class='table-header'>Written by:</th>
+            <!-- Input field for writer -->
+            <td style='width: 80%;'><input type='text' class='input-credit'  id='input-writer' name='writer' size='70' value='{{credits.writer}}'></td>
+          </tr>
+          <!-- Director row -->
+          <tr>
+            <!-- Header for director -->
+            <th class='table-header'>Director:</th>
+            <!-- Input field for director -->
+            <td style='width: 80%;'><input type='text' class='input-credit' id='input-director' name='director' size='70' value='{{credits.director}}'></td>
+          </tr>
+          <!-- Producer row -->
+          <tr>
+            <!-- Header for producer -->
+            <th class='table-header'>Producer:</th>
+            <!-- Input field for producer -->
+            <td style='width: 80%;'><input type='text' class='input-credit' id='input-producer' name='producer' size='70' value='{{credits.producer}}'></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Include JavaScript files -->
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/credits.js'></script>
+{% endblock %}

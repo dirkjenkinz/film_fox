@@ -1,0 +1,72 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <div class='row'>
+    <div class='col-md-4'>
+      <br>
+      <!-- Added a placeholder for the audio source URL -->
+      <audio id='master-play' controls="controls">
+        <source src='' type="audio/mpeg">
+      </audio>
+    </div>
+    <div class='col-md-2'>
+      <!-- Added a heading with dynamic content -->
+      <h3>{{msg}}</h3>
+    </div>
+    <div class='col-md-4'>&nbsp;</div>
+    <div class='col-md-2'>
+      <!-- Corrected the closing tag of the button -->
+      <button class='btn-return'>Back to Characters</button>
+    </div>
+  </div>
+  <div class='row tableFixHead' id='tabhead'>
+    <div class='col-md-12'>
+      <table class='table-bordered table-sm table-dark table-grid' id='tab-char'>
+        <tbody>
+          <tr>
+            <td class='data-char' colspan='3'>
+              <!-- Added a heading with dynamic content -->
+              <h3 id='character'>{{character}}</h3>
+            </td>
+            <td class='data-char'></td>
+            <td class='data-char'></td>
+            <td class='data-char' id='current-voice' colspan='2'>
+              {{currentVoice}}
+            </td>
+          </tr>
+          {% for i in range(0, elements.length) -%}
+            <tr>
+              <td class='data-char' colspan='3'>
+                <!-- Displaying scene and element numbers -->
+                Scene: {{elements[i].sceneNumber}} <br> Element: {{elements[i].elementNumber}}
+              </td>
+              <td class='data-char'>
+                <!-- Displaying voice information -->
+                {{elements[i].voice}}
+              </td>
+              <td class='data-char'>
+                <!-- Displaying dialogue information -->
+                {{elements[i].dialogue}}
+              </td>
+              <td class='data-right'>
+                {% if elements[i].sound %}
+                  <!-- Play button if sound is available -->
+                  <button class='btn-play' value='{{elements[i].sound}}'>
+                    Play
+                  </button>
+                {% else %}
+                  <!-- Generate button if sound is not available -->
+                  <button class='btn-gen' value='{{elements[i].sceneNumber}}_{{elements[i].elementNumber}}'>
+                    Generate
+                  </button>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Included necessary scripts -->
+  <script src='../js/showreel/parent.js'></script>
+  <script src='../js/showreel/edit-character.js'></script>
+{% endblock %}

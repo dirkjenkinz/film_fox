@@ -1,0 +1,124 @@
+{% extends "paperwork/paperwork.njk" %}
+{% block page %}
+  <div class='row'>
+    <div class='col-md-12'>
+      SCENE:
+      <span id="output">{{shotList[sheet].scene}}</span>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-12 slidecontainer'>
+      <!-- Slider for scene navigation -->
+      <input type="range" min="0" max="{{size}}" value="{{shotList[sheet].scene}}" id='slider-scene'>
+    </div>
+    <br><br>
+  </div>
+
+  <div class='row top'>
+    <div class='col-md-2'>
+      <!-- Button for navigating to the previous sheet -->
+      {% if sheet > 0 %}
+        <button id='btn-previous'>Previous Sheet</button>
+      {% else %}
+        <button id='btn-previous' disabled="disabled">Previous Sheet</button>
+      {% endif %}
+    </div>
+    <div class='col-md-6'></div>
+    <div class='col-md-2'>
+      <!-- Button for navigating to the next sheet -->
+      {% if sheet < size %}
+        <button id='btn-next'>Next Sheet</button>
+      {% else %}
+        <button id='btn-next' disabled="disabled">Next Sheet</button>
+      {% endif %}
+    </div>
+  </div>
+  <div class='row top' style='background: white;'>
+    <p id='size' hidden="hidden">{{size}}</p>
+    <p id='sheet' hidden="hidden">{{sheet}}</p>
+    <div class='row tableFixHead' id='tabhead'>
+      <div class='col-md-12'>
+        <!-- Table for sheet header information -->
+        <table id='table-header' style='background: white;'>
+          <tbody>
+            <tr>
+              <td class='data-page'>Sheet
+                {{sheet}}</td>
+              {% if realTitle %}
+                <td class='data-page' colspan='2'>{{realTitle}}</td>
+              {% else %}
+                <td class='data-page' colspan='2'>{{title}}</td>
+              {% endif %}
+            </tr>
+            <tr>
+              <td class='data-page' style='width:10%;' id='sceneNum'>Scene
+                {{shotList[sheet].scene}}</td>
+              <td class='data-page' style='width:40%;'>{{slugs[sheet]}}</td>
+              <td class='data-page' style='width:50%;'>{{shotList[sheet].note}}</td>
+            </tr>
+            <tr>
+              <th class='data-page'>Chars:</th>
+              <td class='data-page' colspan='2'>
+                <!-- Loop through characters and display -->
+                {% for i in range(0, characterList.length) -%}
+                  {% if characterList[i] !== 'NARRATOR' %}
+                    {% if i < (characterList.length - 1) %}
+                      &nbsp;{{characterList[i]}}
+                      --
+                    {%else %}
+                      {{characterList[i]}}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <!-- Table for shot details -->
+        <table id='table-shots' style='background: white;'>
+          <tbody>
+            <thead>
+              <tr>
+                <th class='data-page' style='width: 10%;'>Shot #</th>
+                <th class='data-page' style='width: 10%;'>Shot</th>
+                <th class='data-page' style='width: 10%;'>Angle</th>
+                <th class='data-page' style='width: 10%;'>Audio</th>
+                <th class='data-page' style='width: 20%;'>Subject</th>
+                <th class='data-page' style='width: 35%;'>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Loop through shot lines and display details -->
+              {% for line in range(0, shotList[sheet].lines.length) %}
+                <tr>
+                  <td class='data-page'>
+                    {{line + 1}}</td>
+                  <td class='data-page'>
+                    {{shotList[sheet].lines[line].shot}}
+                  </td>
+                  <td class='data-page'>
+                    {{shotList[sheet].lines[line].angle}}
+                  </td>
+                  <td class='data-page'>
+                    {{shotList[sheet].lines[line].audio}}
+                  </td>
+                  <td class='data-page'>
+                    {{shotList[sheet].lines[line].subject}}
+                  </td>
+                  <td class='data-page'>
+                    {{shotList[sheet].lines[line].description}}
+                  </td>
+                </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Include necessary scripts -->
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/sheets.js'></script>
+{% endblock %}

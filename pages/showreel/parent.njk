@@ -1,0 +1,67 @@
+{% block header %}
+  <!DOCTYPE html>
+  <html lang='en'>
+    <head>
+      <meta charset='UTF-8'/>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+      <title>Film Fox Showreel</title>
+      <link rel='stylesheet' href='../css/style.css'/>
+      <link rel='stylesheet' href='../css/bootstrap.min.css'/>
+      <script src='../js/jquery-3.7.1.min.js'></script>
+      <script src='../js/bootstrap.min.js'></script>
+      <script src="../js/howler.min.js"></script>
+    </head>
+    <body>
+      <div class='container-fluid'>
+        <div class='main-header'>
+          <div class='row top'>
+            <div class='col-md-1'>
+              <img src='../images/film_fox_logo.jpg' alt='Film Fox Logo' width='30' height='30'>
+            </div>
+            <div class="col-md-2">
+              Film Fox
+            </div>
+            <div class='col-md-1'></div>
+            <div class='col-md-5' id='filmTitle'>
+              {{ title }}
+              <!-- Hidden properties for script details -->
+              <p id='length' hidden='hidden'>{{script.length}}</p>
+              <p id='sceneNumber' hidden='hidden'>{{sceneNumber}}</p>
+              <p id='elementNumber' hidden='hidden'>{{elementNumber}}</p>
+              <p id='highestScene' hidden='hidden'>{{highestScene}}</p>
+              <!-- Additional hidden properties for various settings -->
+              <p id='audio' hidden="hidden">{{audio}}</p>
+              <p id='voice' hidden="hidden">{{voice}}</p>
+              <p id='mute' hidden="hidden">{{mute}}</p>
+              <p id='speak' hidden="hidden">{{speak}}</p>
+              <p id='para' hidden="hidden">{{para}}</p>
+              <p id='start' hidden="hidden">{{start}}</p>
+              <p id='finish' hidden="hidden">{{finish}}</p>
+              <p id='element' hidden="hidden">{{element}}</p>
+            </div>
+            <div class='col-md-2' style='text-align: right;'>{{page}}</div>
+          </div>
+          <div class='row top topnav' style='padding-bottom: 0; margin-bottom:0;'>
+            <div class='col-md-11'>
+              <!-- Navigation links for different sections -->
+              <p class='nav-para' id='nav-showreel'>Showreel</p>
+              <p class='nav-para' id='nav-slideshow'>Slideshow</p>
+              <p class='nav-para' id='nav-sound'>Sound</p>
+              <p class='nav-para' id='nav-video'>Video</p>
+              <p class='nav-para' id='nav-ctv'>Voice Map</p>
+              <p class='nav-para' id='nav-characters'>Characters</p>
+              <p class='nav-para' id='nav-voices'>Voices</p>
+              <p class='nav-para' id='nav-paperwork'>PAPERWORK</p>
+            </div>
+            <div class='col-md-1'>
+                          <p class='nav-para' id='nav-front'>Front</p>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% block page %}{% endblock %}
+      {% block footer %}
+      </body>
+    </html>
+  {% endblock %}

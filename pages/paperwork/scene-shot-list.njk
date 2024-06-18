@@ -1,0 +1,224 @@
+{% extends "paperwork/paperwork.njk" %}
+{% block page %}
+
+  <div class='row'>
+    <div class='col-md-12'>
+      SCENE:
+      <span id="output">{{sceneNumber}}</span>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-12 slidecontainer'>
+      <!-- Slider for scene navigation -->
+      <input type="range" min="0" max="{{size}}" value="{{sceneNumber}}" id='slider-scene'>
+    </div>
+  </div>
+
+  <div class='row' style='border-radius: 25px;'>
+    <div class='col-md-8'>
+      {{slug}}
+    </div>
+    <div class='col-md-2'>
+      {% if sceneNumber > 0 %}
+        <button class='btn-previous' id='btn-previous'>
+          Previous
+        </button>
+      {% else %}
+        <button class='btn-previous' id='btn-previous' disabled="disabled">
+          Previous
+        </button>
+      {% endif %}
+    </div>
+    <div class='col-md-2'>
+      {% if sceneNumber < size %}
+        <button class='btn-next' id='btn-next'>
+          Next
+        </button>
+      {% else %}
+        <button class='btn-next' id='btn-next' disabled="disabled">
+          Next
+        </button>
+      {% endif %}
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-1'>
+      Note:
+    </div>
+    <div class='col-md-10'>
+      <input type="text" id="input-note" name="input-note" size='80' value='{{note}}'>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <!-- Table for scene shots -->
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_shots'>
+        <tbody>
+          <!-- Displaying character dialogue and notes -->
+          <tr>
+            <td class='data-left'>
+              {{slug.dialogue}}
+            </td>
+            <td class='data-left'>
+              {{slug.note}}
+            </td>
+          </tr>
+          <!-- Displaying characters -->
+          <tr>
+            <th style='header-right' width='10%'>
+              Characters:
+            </th>
+            <td colspan='3' class='data-left'>
+              {% for i in range(0, characterList.length) -%}
+                {% if i < (characterList.length - 1) %}
+                  &nbsp;{{characterList[i]}}&nbsp;-
+                {%else %}
+                  {{characterList[i]}}
+                {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class='row' id='tabhead'>
+    <div class='col-md-12 tableFixHead2'>
+      <!-- Table for shot details -->
+      <table class='table-bordered table-sm table-dark table-grid' id='tab-shot' width='100%'>
+        <thead>
+          <tr>
+            <th class='shot-header'>
+              #
+            </th>
+            <th class='shot-header'>
+              Shot
+            </th>
+            <th class='shot-header'>
+              Camera Angle
+            </th>
+            <th class='shot-header'>
+              Camera Move
+            </th>
+            <th class='shot-header'>
+              Audio
+            </th>
+            <th class='shot-header'>
+              Subject
+            </th>
+            <th class='shot-header'>
+              Description
+            </th>
+            <th>
+              <button class='btn-add-shot' id='btn-add-shot_0' value='-1'>
+                +
+              </button>
+            </th>
+            <th>
+              &nbsp;
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop through shots and display shot details -->
+          {% for i in range(0, lines.length) -%}
+            <tr>
+              <td class='data-left'>
+                {{i +1}}
+              </td>
+              <td class='data-left'>
+                <!-- Dropdown for shot selection -->
+                <select id='shot-shot_{{i}}' class='shot-select shot-shot'>
+                  {% for index in range(0, shots.length) -%}
+                    {% if shots[index] == lines[i].shot %}
+                      <option value='{{shots[index]}}' selected="selected">
+                        {{shots[index]}}
+                      </option>
+                    {% else %}
+                      <option value='{{shots[index]}}'>
+                        {{shots[index]}}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </td>
+              <td class='data-left'>
+                <!-- Dropdown for camera angle selection -->
+                <select id='shot-angle_{{i}}' class='shot-select shot-angle'>
+                  {% for index in range(0, angles.length) -%}
+                    {% if angles[index] === lines[i].angle %}
+                      <option value='{{angles[index]}}' selected="selected">
+                        {{angles[index]}}
+                      </option>
+                    {% else %}
+                      <option value='{{angles[index]}}'>
+                        {{angles[index]}}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </td>
+              <td class='data-left'>
+                <!-- Dropdown for camera move selection -->
+                <select name="move_{{i}}" id='shot-move_{{i}}' class='shot-select'>
+                  {% for index in range(0, moves.length) -%}
+                    {% if moves[index] == lines[i].move %}
+                      <option value='{{moves[index]}}' selected="selected">
+                        {{moves[index]}}
+                      </option>
+                    {% else %}
+                      <option value='{{moves[index]}}'>
+                        {{moves[index]}}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </td>
+              <td class='data-left'>
+                <!-- Dropdown for audio selection -->
+                <select name="audio{{i}}" id='shot-audio_{{i}}' class='shot-select'>
+                  {% for index in range(0, audio.length) -%}
+                    {% if audio[index] == lines[i].audio %}
+                      <option value='{{audio[index]}}' selected="selected">
+                        {{audio[index]}}
+                      </option>
+                    {% else %}
+                      <option value='{{audio[index]}}'>
+                        {{audio[index]}}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </td>
+              <td>
+                <!-- Textarea for subject -->
+                <textarea id='shot-subject_{{i}}' class='shot-subject' rows='1' cols='40'>{{lines[i].subject | trim}}</textarea>
+              </td>
+              <td>
+                <!-- Textarea for shot description -->
+                <textarea id='shot-description_{{i}}' class='shot-description' rows='1' cols='40'>{{lines[i].description | trim}}</textarea>
+              </td>
+              <td>
+                <button class='btn-add-shot' id='btn-add-shot_{{i}}' value='{{i}}'>
+                  +
+                </button>
+              </td>
+              <td>
+                <button class='btn-delete-shot' id='btn-delete-shot_{{i}}' value='{{i}}'>
+                  -
+                </button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Include necessary scripts -->
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/scene-shot-list.js'></script>
+{% endblock %}

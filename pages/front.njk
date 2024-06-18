@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <!-- Metadata for character encoding, compatibility, and viewport settings -->
+    <meta charset='UTF-8'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <title>Film Fox Front Page</title>
+    <!-- Link to custom styles and Bootstrap CSS -->
+    <link rel='stylesheet' href='../css/style.css'/>
+    <link rel='stylesheet' href='../css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='../css/toggle.css'/>
+    <!-- Include jQuery and Bootstrap JavaScript libraries -->
+    <script src='../js/jquery-3.7.1.min.js'></script>
+    <script src='../js/bootstrap.min.js'></script>
+  </head>
+  <body>
+    <!-- Main container -->
+    <div class='container-fluid'>
+      <div class='front-header'>
+        <div class='row'>
+          <div class='col-md-1'>
+            <img src='../images/film_fox_logo.jpg' alt='Film Fox Logo' width='80' height='80' style='margin-top:14px;'>
+          </div>
+          <div class='col-md-2'>
+          <br><br>
+            Film Fox
+          </div>
+        </div>
+      </div>
+
+      <!-- API Key update row with input field and button -->
+      <div class='row' id='api-update' style='background: blue;'>
+        <div class='col-md-1'></div>
+        <div class='col-md-5'>
+          <br>
+          API Key =
+          <!-- Input field for API Key -->
+          <input type='text' name='input-api-key' id='input-api-key' size='50' style='border: 10;' autofocus='autofocus' value='{{api_key}}'>
+        </div>
+        <div class='col-md-2'>
+          <br>
+          <!-- Button for adding/changing API Key -->
+          <button id='btn-api-key' style='margin-top: 4px;'>
+            Add/Change API Key
+          </button>
+        </div>
+        <br>
+      </div>
+      <!-- Row for displaying converted scripts -->
+      <div class='row show2'>
+        <div class='col-md-1'>
+          &nbsp;
+        </div>
+        <div class='col-md-3'>
+          <p>
+            <b>Converted scripts.<br>Click to display.</b>
+          </p>
+          <!-- Loop for generating buttons for each script -->
+          {% for i in range(0, fffList.length) -%}
+            <div class='row show'>
+              <!-- Button for displaying script content -->
+              <button class='btn-fff' value='{{fffList[i]}}'>
+                {{fffList[i].substring(0,40)}}
+              </button>
+            </div>
+          {%- endfor %}
+        </div>
+        <!-- Subscription details and API Key button -->
+        <div class='col-md-4' id='sub-show'>
+          <div class='row'>
+            <div class='col-md-5'>
+              <b>Subscription Details.</b>
+            </div>
+            <div class='col-md-7'>
+              &nbsp;
+            </div>
+          </div>
+          <div class='row'>
+            <!-- Display subscription details in a table -->
+            {% if subscription !== '' %}
+              <table class='table-bordered table-sm table-dark table-grid' id='subscription_table'>
+                <tbody>
+                  <tr>
+                    <th class='data-left'>Tier</th>
+                    <td class='data-left'>{{subscription.tier.toUpperCase()}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Character Count</th>
+                    <td class='data-left'>{{subscription.character_count}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Character Limit</th>
+                    <td class='data-left'>{{subscription.character_limit}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Characters Left</th>
+                    <td class='data-left'>{{subscription.character_limit - subscription.character_count}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Can Extend Character Limit</th>
+                    <td class='data-left'>
+                      {{subscription.can_extend_character_limit}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Allowed to Extend Character Limit</th>
+                    <td class='data-left'>
+                      {{subscription.allowed_to_extend_character_limit}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Next Character Count Reset</th>
+                    <td class='data-left'>
+                      {{subscription.next_character_count_reset}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Voice Limit</th>
+                    <td>{{subscription.voice_limit}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Professional Voice Limit</th>
+                    <td>{{subscription.professional_voice_limit}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Currency</th>
+                    {% if subscription.currency %}
+                      <td>{{subscription.currency.toUpperCase()}}</td>
+                    {% else %}
+                      <td></td>
+                    {% endif %}
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Status</th>
+                    <td>{{subscription.status.toUpperCase()}}</td>
+                  </tr>
+                  <tr>
+                    <th class='data-left'>Next Payment Due On</th>
+                    <td>
+                      {{subscription.next_invoice.next_payment_attempt}}
+                    </td>
+                  </tr>
+                  <th class='data-left'>Amount Due</th>
+                  {% if subscription.next_invoice %}
+                    <td>${{subscription.next_invoice.amount_due_cents / 100}}</td>
+                  {% else %}
+                    <td></td>
+                  {% endif %}
+                </tr>
+                <tr>
+                  <tr>
+                    <td colspan='2' style='text-align: center;'>
+                      <img src='../images/film_fox_logo.jpg' alt='Film Fox Logo' width='80' height='80' style='margin: auto; margin-top: 14px;'>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            {% else %}
+              <br>
+              <p>&nbsp; Unable to retrieve subscription details</p>
+            {% endif %}
+          </div>
+        </div>
+        <!-- Row for displaying raw Final Draft scripts -->
+        <div class='col-md-3'>
+          <p>
+            <b>Raw Final Draft Scripts.<br>Click to create Film Fox File.</b>
+          </p>
+          <!-- Loop for generating buttons for each Final Draft script -->
+          {% for i in range(0, fdxList.length) -%}
+            <div class='row show2'>
+              <!-- Conditional button based on script conversion status -->
+              {% if converted[i] === 'n' %}
+                <button class='btn-fdx' value='{{fdxList[i]}}'>
+                  {{fdxList[i].substring(0,40)}}
+                </button>
+              {% else %}
+                <button class='btn-fdx-yes' value='{{fdxList[i]}}'>
+                  {{fdxList[i].substring(0,40)}}
+                </button>
+              {% endif %}
+            </div>
+          {%- endfor %}
+        </div>
+        <div class='col-md-1'>
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <!-- Include custom JavaScript file -->
+    <script src='../js/front.js'></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'paperwork/paperwork.njk' %}
+{% block page %}
+  <div class='row top scene-breakdown-header'>
+    <p id='categories' hidden='hidden'>{{categories}}</p>
+    <p id='hidden' hidden='hidden'>{{hidden}}</p>
+    <div class='col-md-2'>
+      <button id='btn-first-scene' {% if sceneNumber <= 0 %} disabled="disabled" {% endif %}>
+        First Scene
+      </button>
+    </div>
+    <div class='col-md-2'>
+      {% if sceneNumber > 1 %}
+        <button id='btn-previous-scene'>
+          Previous Scene
+        </button>
+      {% else %}
+        <button id='btn-previous-scene' disabled='disabled'>
+          Previous Scene
+        </button>
+      {% endif %}
+    </div>
+
+    <div class='col-md-2' style='background: black; margin-top:4px; border-radius:25px;'>
+      <b>SCENE:
+        {{sceneNumber}}</b>
+    </div>
+
+    <div class='col-md-2'>
+      {% if sceneNumber < highestScene %}
+        <button id='btn-next-scene'>
+          Next Scene
+        </button>
+      {%else %}
+        <button id='btn-next-scene' disabled='disabled'>
+          Next Scene
+        </button>
+      {% endif %}
+    </div>
+    <div class='col-md-2'>
+      {% if sceneNumber < highestScene %}
+        <button id='btn-last-scene'>
+          Last Scene
+        </button>
+      {% else %}
+        <button id='btn-last-scene' disabled='disabled'>
+          Last Scene
+        </button>
+      {% endif %}
+    </div>
+  </div>
+  <!-- end of row 1 -->
+
+  <div class='row top' style='margin-top: 40px;'>
+    <div class='col-md-9'>
+      {% for i in range(0, breakdown.length, 3) -%}
+        <div class='row'>
+          {% for num in range(0, 3) %}
+            {% if (i + num) < breakdown.length %}
+              <div class='col-md-4' id='bx_{{ i + num }}'>
+                <div class='props-box'>
+                  <p class='breakdown-header'>{{headers[i + num]}}</p>
+                  {% for j in range(1, breakdown[i + num].length) -%}
+                    <p id='entity-{{j -1}}' class='breakdown-list'>{{breakdown[i + num ][j]}}</p>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class='col-md-3 script-box'>
+      {% set current = '' %}
+      {% for i in range(0, scene.length) -%}
+        {% if scene[i].character === 'NARRATOR'%}
+          <p class='action' id='{{p_act[i]}}'><br>{{scene[i}.dialogue}}</p>
+        {% else %}
+          {% if scene[i].character !== current %}
+            <p class='character' id='{{p_cha[i]}}'>{{scene[i].character}}</p>
+            {% set current = scene[i].character %}
+          {% else %}
+            <p class='character' id='{{p_cha[i]}}'>-</p>
+          {% endif %}
+          <p class='dialogue' style='text-align: left;' id='{{p_dia[i]}}'>{{scene[i}.dialogue}}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/breakdown.js'></script>
+{% endblock %}

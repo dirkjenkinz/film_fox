@@ -1,0 +1,72 @@
+{% block header %}
+  <!DOCTYPE html>
+  <html lang='en'>
+    <head>
+      <meta charset='UTF-8'/>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+      <title>Film Fox Paperwork</title>
+      <link rel='stylesheet' href='../css/style.css'/>
+      <link rel='stylesheet' href='../css/bootstrap.min.css'/>
+      <script src='../js/jquery-3.7.1.min.js'></script>
+      <script src='../js/bootstrap.min.js'></script>
+      <script src="../js/howler.min.js"></script>
+    </head>
+    <body>
+      <div class='container-fluid'>
+        <div class='main-header'>
+          <div class='row top'>
+          <div class='col-md-1'>
+              <img src='../images/film_fox_logo.jpg' alt='Film Fox Logo' width='30' height='30'>
+            </div>
+            <div class='col-md-2'>
+              Film Fox
+            </div>
+            <div class='col-md-1'></div>
+            <div class='col-md-5' id='filmTitle'>
+              <!-- Display dynamic title -->
+              {{ title }}
+              <!-- Hidden input fields for various data -->
+              <p id='length' hidden='hidden'>{{script.length}}</p>
+              <p id='sceneNumber' hidden='hidden'>{{sceneNumber}}</p>
+              <p id='elementNumber' hidden='hidden'>{{elementNumber}}</p>
+              <p id='highestScene' hidden='hidden'>{{highestScene}}</p>
+              <p id='audio' hidden="hidden">{{audio}}</p>
+              <p id='voice' hidden="hidden">{{voice}}</p>
+              <p id='mute' hidden="hidden">{{mute}}</p>
+              <p id='speak' hidden="hidden">{{speak}}</p>
+              <p id='para' hidden="hidden">{{para}}</p>
+              <p id='start' hidden="hidden">{{start}}</p>
+              <p id='finish' hidden="hidden">{{finish}}</p>
+              <p id='element' hidden="hidden">{{element}}</p>
+              <p id='caller' hidden="hidden">{{caller}}</p>
+            </div>
+            <div class='col-md-2' style='text-align: right;'>
+              <!-- Display dynamic page title -->
+              {{page}}
+            </div>
+          </div>
+          <div class='row top topnav' style='padding-bottom: 0; margin-bottom:0;'>
+            <div class='col-md-11'>
+              <!-- Navigation links -->
+              <p class='nav-para' id='nav-showreel'>SHOWREEL</p>
+              <p class='nav-para' id='nav-arranger'>Scene Arranger</p>
+              <p class='nav-para' id='nav-scene-shot-list'>Shot List</p>
+              <p class='nav-para' id='nav-sheets'>Sheets</p>
+              <p class='nav-para' id='nav-credits'>Credits</p>
+              <p class='nav-para' id='nav-breakdown'>Scene Breakdown</p>
+              <p class='nav-para' id='nav-report'>Breakdown Reports</p>
+              <p class='nav-para' id='nav-categories'>Categories</p>
+              <p class='nav-para' id='nav-generate-paperwork'>Generate Paperwork</p>
+            </div>
+            <div class='col-md-1'>
+              <p class='nav-para' id='nav-front'>FRONT</p>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% block page %}{% endblock %}
+      {% block footer %}
+      </body>
+    </html>
+  {% endblock %}

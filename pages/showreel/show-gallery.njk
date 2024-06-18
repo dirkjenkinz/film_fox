@@ -1,0 +1,91 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <!-- Hidden elements for data -->
+  <p id='images-size' hidden="hidden">{{images.size}}</p>
+
+  <!-- Gallery display -->
+  <div class='row' id='tabhead'>
+    <div class='col-md-12 tableFixHead3' id='table1'>
+      <!-- Hidden caller information -->
+      <p id='caller' hidden='hidden'>{{caller}}</p>
+      
+      <!-- Gallery table -->
+      <table class='table-bordered table-sm table-dark table-grid'>
+        <tbody id='tblBody1'>
+          {% for i in range(0, images.length, 2) -%}
+            <!-- Image information row -->
+            <tr>
+              {% for num in range(0, 2) -%}
+                {% if images[i + num][0] %}
+                  <!-- Display image name -->
+                  <td class='data-left' id='image-name-{{i + num}}' colspan='2'>
+                    {{images[i + num][0].substring(0,28)}}
+                  </td>
+                  
+                  <!-- Delete button -->
+                  <td class='data-left'>
+                    {% if images[i + num][2] === 'no' %}
+                      <button class='btn-delete' id='btn-delete-{{i + num}}' value='{{images[i + num][0]}}'>
+                        Delete
+                      </button>
+                    {% else %}
+                      <button disabled='disabled' class='btn-delete' id='btn-delete-{{i + num}}' value='{{images[i + num][0]}}'>
+                        &nbsp;
+                      </button>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            
+            <!-- Display image or video -->
+            <tr id='image-{{i}}' class='image'>
+              {% for num in range(0, 2) -%}
+                {% if images[i + num][0] %}
+                  <!-- Display image or video based on type -->
+                  <td class='data-left' id='image-{{i + num}}' colspan='3' width='25%'>
+                    {% if images[i + num][1] === 'movie' %}
+                      <video width='480' height='270' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                        <source src='../data/{{title}}/vision/images/{{images[i + num][0]}}' type='video/mp4'>
+                      </video>
+                    {% else %}
+                      <img width='480' height='270' src='../data/{{title}}/vision/images/{{images[i + num][0]}}' id='img_{{i + num}}' class='img' alt='{{images[i + num][0]}}'>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            
+            <!-- Gallery buttons -->
+            <tr class='gallery'>
+              {% for num in range(0, 2) -%}
+                {% if images[i + num][0] %}
+                  <!-- Rename button and input -->
+                  <td>
+                    <button class='btn-rename' id='btn-rename-{{i + num}}' value='{{images[i + num][0]}}'>
+                      Rename
+                    </button>
+                  </td>
+                  <td class='data-left' id='image-ren-{{i + num}}'>
+                    <input type='text' id='input-rename-{{i + num}}' size='12'>
+                    {{images[i + num][3]}}
+                  </td>
+                  <td></td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            
+            <!-- Spacing row -->
+            <tr>
+              <td colspan='3'>&nbsp;</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Include scripts -->
+  <script src='../js/showreel/parent.js'></script>
+  <script src='../js/showreel/show-gallery.js'></script>
+{% endblock %}

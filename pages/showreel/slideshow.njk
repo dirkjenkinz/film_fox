@@ -1,0 +1,100 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+
+    <div class='row top'>
+        <!-- Hidden data elements for JavaScript access -->
+        <p hidden="hidden" id='audioLength'>{{ audioLength }}</p>
+        <p hidden="hidden" id='type_{{ i }}'>{{ element.type }}</p>
+        <p hidden="hidden" id='highestElement'>{{ highestElement }}</p>
+        <p hidden="hidden" id='highestScene'>{{ highestScene }}</p>
+        <p hidden="hidden" id='elementNumber'>{{ elementNumber }}</p>
+        <p hidden="hidden" id='sceneNumber'>{{ sceneNumber }}</p>
+        <p hidden="hidden" id='filmTitle'>{{ title }}</p>
+    </div>
+
+    <div class='row' style='background: black; padding-top: 4px;'>
+        <div class='col-md-2'>
+            <button id='btn-back'>Back 1 element</button>
+        </div>
+        <div class='col-md-2'>
+            <button id='btn-forward'>Forward 1 element</button>
+        </div>
+        <div class='col-md-2'>
+            {% if sceneNumber > 0 %}
+                <button id='btn-back-scene'>Back 1 Scene</button>
+            {% endif %}
+        </div>
+        <div class='col-md-2'>
+            {% if sceneNumber < highestScene %}
+                <button id='btn-forward-scene'>Forward 1 Scene</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id='output'>
+
+        <div class='col-row'>
+            SCENE
+            {{ sceneNumber }}
+            (element
+            {{ elementNumber }}):
+            {{ slug }}
+        </div>
+
+        <div class='row' style='background: silver; color: black;' id='display-area'>
+            <div class='col-md-12'>
+                <table class='table-bordered table-sm table-dark table-grid' id='tab_showreel'>
+                    <tr style='border: white 4px solid;'>
+                        <!-- Showreel video/image content -->
+                        <td class='data-showreel' id='image_{{ i }}' style='border: white 4px solid; text-align:right;'>
+                            {% if element.type === 'movie' %}
+                                <video width='420' height='240' controls="controls" autoplay="autoplay" muted="muted" id='image_{{ i }}' class='image'>
+                                    <source src='../data/{{ title }}/vision/images/{{ element.image }}' type='video/mp4'>
+                                </video>
+                            {% elseif element.type === 'still' %}
+                                <img width='420' height='240' src='../data/{{ title }}/vision/images/{{ element.image }}' id='image_{{ i }}' class='img' alt='{{ script[i].image }}'>
+                            {% else %}
+                                <h2 class='data-showreel'>NO IMAGE</h2>
+                            {% endif %}
+                        </td>
+
+                        <!-- Showreel character/dialogue content -->
+                        <td class='data-showreel' style='padding: 4px; border: white 4px solid;' colspan='2'>
+                            <div class='-showreel-box' style='font-size: 125%; color: white;'>
+                                {% if element.character === 'NARRATOR' %}
+                                    <p style='text-align: center; font-weight: bold;'></p>
+                                    <p>{{ element.dialogue }}</p>
+                                {% else %}
+                                    <p style='text-align: center; font-weight: bold;'>{{ element.character }}</p>
+                                    {% if element.parenthetical %}
+                                        <p style='text-align: center;'>({{ element.parenthetical }})</p>
+                                    {% endif %}
+                                    <p>{{ element.dialogue }}</p>
+                                {% endif %}
+                            </div>
+                        </td>
+
+                        <!-- Hidden audio content -->
+                        <td hidden="hidden">
+                            {% if element.sound %}
+                                <p>{{ element.sound }}</p>
+                                <audio id='master-play' controls="controls" autoplay="autoplay">
+                                    <source src='{{ audio }}' type='audio/ogg'>
+                                    <source src='{{ audio }}' type='audio/mpeg'>
+                                    Your browser does not support the audio tag.
+                                </audio>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>&nbsp;</div>
+    </div>
+
+    <script src='../js/showreel/parent.js'></script>
+    <script src='../js/showreel/slideshow.js'></script>
+
+{% endblock %}

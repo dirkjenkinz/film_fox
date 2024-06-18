@@ -1,0 +1,53 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  {% set step = 4 %}
+
+  <div class='row top'>
+    <div class='col-md-4'>
+      <button class='btn-edit' id='btn-generate-all'>Generate/Overwrite All Scenes</button>
+    </div>
+  </div>
+
+  <div class='row tableFixHead3' id='tabhead'>
+    <div class='col-md-12'>
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_img'>
+        <tbody>
+          {% for i in range(0, script.length, step) -%}
+            <tr>
+              {% for increment in range(0, step) -%}
+                {% set current = i + increment %}
+                {% if script[current] is defined %}
+                  <td class='blue-box'>
+                    Scene {{ current }}
+                  </td>
+                  <td class='blue-box'>
+                    {% if completeArray[current] === 'no' %}
+                      <button class='btn-edit btn-generate-elements' value="{{ current }}" id='btn-generate-elements-{{ current }}'>Generate elements</button>
+                    {% else %}
+                      <button class='btn-blue btn-generate-elements' value="{{ current }}" id='btn-generate-elements-{{ current }}'>Refresh {{lengthList[current]}} elements</button>
+                    {% endif %}
+                  </td>
+                  <td class='blue-box'>
+                    {% if completeArray[current] === 'yes' %}
+                      {% if exists[current] === 'no' %}
+                        <button class='btn-edit btn-generate-scene' value="{{ current }}" id='btn-generate-scene-{{ current }}'>Generate scene</button>
+                      {% else %}
+                        <button class='btn-generate-scene' value="{{ current }}" id='btn-generate-scene-{{ current }}'>Overwrite scene</button>
+                      {% endif %}
+                    {% endif %}
+                  </td>
+                  <td style='background:black;'>&nbsp;&nbsp;</td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src='../js/showreel/parent.js'></script>
+<script src='../js/showreel/video.js'></script>
+
+{% endblock %}

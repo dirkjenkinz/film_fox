@@ -1,0 +1,43 @@
+{% extends "paperwork/paperwork.njk" %}
+
+{% block page %}
+  <!-- Hidden variables for phase and size -->
+  <p id='phase' hidden='hidden'>{{ phase }}</p>
+  <p id='size' hidden='hidden'>{{ size }}</p>
+
+  <!-- Main content -->
+  <div class='row'>
+    <div class='col-md-10'>
+      <!-- Loop through shotList and display in groups of 5 -->
+      {% for i in range(1, shotList.length) %}
+        <div class='row'>
+            {% if i < shotList.length %}
+              <div class='col-md-12 scene-box' id='bx_{{ i }}' value='{{i}}'; 
+                draggable="true" 
+                ondragstart="drag(event)" 
+                ondragover="allowDrop(event)" 
+                ondrop="drop(event)">
+
+                  <p id='sc_{{ i }}' class='scene-para'>SCENE: {{ shotList[i].scene }}
+                  {{ slugList[i] }} -> {{ shotList[i].note }}</p>
+              </div>
+            {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class='col-md-2' id = 'controls'>
+      <!-- Button for resetting order -->
+      <button id='btn-reset'>Reset Order</button>
+      <br>
+      <!-- Loop through sceneOrder and display scene names -->
+      {% for i in range(1, sceneOrder.length) -%}
+        <span class='blob'>{{ sceneOrder[i] }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Include JavaScript files -->
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/scene-arranger.js'></script>
+{% endblock %}

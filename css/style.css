@@ -1,0 +1,614 @@
+/* General Styles */
+.container,
+.container-fluid {
+  background: black;
+  color: white;
+  border: 12px solid darkslategrey;
+  font-size: 80;
+}
+
+.front-header {
+  position: fixed;    /* Makes the header stay in place while scrolling */
+  top: 0;             /* Aligns the header at the top */
+  left: 0;            /* Aligns the header at the left */
+  width: 100%;        /* Ensures the header stretches across the full width of the viewport */
+  z-index: 1000;      /* Ensures the header stays on top of other content */
+  background: black;
+}
+
+.main-header {
+  position: fixed;    /* Makes the header stay in place while scrolling */
+  top: 0;             /* Aligns the header at the top */
+  left: 0;            /* Aligns the header at the left */
+  width: 100%;        /* Ensures the header stretches across the full width of the viewport */
+  z-index: 1000;      /* Ensures the header stays on top of other content */
+  background: black;
+}
+
+.scene-breakdown-header {
+  position: fixed;    /* Makes the header stay in place while scrolling */
+  top: 90px;         /* Aligns the header at the top */
+  left: 0;            /* Aligns the header at the left */
+  width: 100%;        /* Ensures the header stretches across the full width of the viewport */
+  z-index: 1000;      /* Ensures the header stays on top of other content */
+  background: black;
+}
+
+body {
+  padding-top: 80px;  /* Adds top padding to the body to ensure content isn't hidden behind the fixed header */
+}
+
+button {
+  display: block;
+  background: red;
+  color: white;
+  border: 2px solid black;
+  text-align: center;
+  width: 100%;
+  border-radius: 25px;
+}
+
+input {
+  background: white;
+  color: black;
+  border-radius: 25px;
+}
+
+table {
+  border-radius: 25px;
+  background: black;
+}
+
+.paperwork-box {
+  background: lightgrey;
+  border: double 4px red;
+  border-radius: 25px;
+  padding: 10px 0;
+  margin: 0 10px;
+  color: black;
+}
+
+.header-ctv {
+  background: slategrey;
+  color: black;
+  border-radius: 25px;
+}
+
+.data-ctv {
+  padding-top: 5px;
+  background: silver;
+  color:black;
+  border-radius: 25px;
+  border: black 2px solid;
+}
+
+.btn-merge {
+  background: blue;
+}
+
+.btn-blue {
+  display: block;
+  background: blue;
+  color: white;
+  border: 2px solid black;
+  text-align: center;
+  width: 100%;
+}
+
+.top {
+  padding: 4px 0;
+  border: 4px double cornflowerblue;
+}
+
+.selected {
+  background: red;
+}
+
+.scene-box {
+  background: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+  font-size: 80%;
+  padding-bottom: 4px;
+}
+
+.table-red {
+  background: red;
+}
+
+.data-showreel {
+  width: 50%;
+  padding: 4px;
+}
+
+/* Table Styles */
+.table-header,
+.table-data,
+.table-header-small,
+.table-data-small {
+  background: grey;
+  color: white;
+  border: 2px solid red;
+}
+
+.table-header,
+.table-header-small {
+  background: slategrey;
+}
+
+.table-scroll tbody {
+  position: absolute;
+  overflow-y: scroll;
+  width: 1200px;
+}
+
+.table-scroll tr {
+  width: 100%;
+  table-layout: fixed;
+  display: inline-table;
+}
+
+.table-scroll thead > tr > th {
+  border: none;
+}
+
+.input-credit {
+  color: black;
+}
+
+#input-note {
+  color: white;
+  background: black;
+  text-align: left;
+}
+
+/* Form Styles */
+.input,
+textarea {
+  background: black;
+  color: white;
+  border: 2px solid white;
+}
+
+#input-api-key {
+  background: black;
+  color: white;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Button Styles */
+.btn-fdx-yes {
+  background: slategrey;
+  width: 100%;
+}
+
+.btn-return {
+  margin-top: 30px;
+  background: red;
+}
+
+.btn-side {
+  background: blue;
+  color: white;
+  border: 2px solid black;
+  margin: 2px 2px 0 0;
+  width: 94%;
+}
+
+.hdr {
+  background: silver;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.header-line {
+  background: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Miscellaneous Styles */
+html {
+  background: #555;
+}
+
+.img {
+  border: 5px solid #555;
+}
+
+.card {
+  text-align: center;
+}
+
+.well {
+  height: 500px;
+}
+
+.voice,
+#voices {
+  background: black;
+  color: white;
+}
+
+.sep {
+  background: skyblue;
+}
+
+/* Dialog Styles */
+.character,
+.dialogue {
+  text-align: center;
+  margin: 0 40px;
+}
+
+/* Slider Styles */
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+/* Text Styles */
+.chars,
+.txt,
+.data-header,
+.data-display,
+.data-char,
+.header-display,
+.non-header-display,
+.break {
+  background: black;
+  color: white;
+  padding: 0 4px;
+}
+
+.data-header {
+  text-align: right;
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+.data-left {
+  text-align: left;
+  background: black;
+  color: silver;
+}
+
+.data-central {
+  text-align: center;
+  background: black;
+  color: silver;
+}
+
+.data-right {
+  text-align: right;
+  background: black;
+  color: white;
+}
+
+.data-page {
+  background: white;
+  color: black;
+}
+
+.header-display {
+  background: slategrey;
+}
+
+.non-header-display {
+  background: cornflowerblue;
+  font-weight: bold;
+}
+
+.break {
+  background: silver;
+}
+
+.breakdown-list {
+  margin-bottom: -6px;
+};
+
+#module-text {
+  background: blue;
+  color: red;
+  border: 6px solid black;
+  margin: 0 60px;
+}
+
+#list,
+#error-response {
+  text-align: center;
+}
+
+#characters,
+#sound-data,
+#sub-show {
+  background: black;
+  color: white;
+}
+
+#filmTitle-head {
+  text-align: right;
+}
+
+#summary,
+#fname,
+.chars,
+.txt {
+  background: white;
+  color: black;
+}
+
+#btn-front {
+  margin-top: 20px;
+}
+
+.white-border {
+  padding: 2px 10px;
+  background: red;
+  color: white;
+  border: 4px solid white;
+  text-align: center;
+}
+
+.header-right {
+  color: white;
+  background: black;
+  text-align: right;
+}
+
+.char-box {
+  background: black;
+  border: blue 2px solid;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+/* Shot Styles */
+.shot-header,
+.shot-header-right,
+.shot-select,
+.shot-subject,
+.shot-description,
+.display-box {
+  background: white;
+  color: black;
+}
+
+.shot-header-right {
+  text-align: right;
+}
+
+.shot-subject,
+.shot-description {
+  border: none;
+}
+
+/* Paperwork Styles */
+.paperwork-box {
+  background: lightgrey;
+  color: black;
+  border: double 4px red;
+  border-radius: 25px;
+  padding: 10px 0;
+  margin: 0 10px;
+}
+
+/* Show Styles */
+.show,
+.show2 {
+  background: steelblue;
+  color: black;
+  border: 4px solid blue;
+  padding: 4px;
+}
+
+/* Top Navigation Styles */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav p {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 4px 16px 0 16px;
+  text-decoration: none;
+}
+
+.topnav p:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav p.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Table Styles */
+.tableFixHead,
+.tableFixHead2,
+.tableFixHead3 {
+  overflow-y: auto;
+  border: 12px black solid;
+}
+
+.tableFixHead thead th,
+.tableFixHead2 thead th,
+.tableFixHead3 thead th {
+  position: sticky;
+  top: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  padding: 4px;
+  border: 4px solid black;
+  background: black;
+}
+
+.head-display {
+  border-bottom: 5px solid black;
+  color: black;
+  background: #eee;
+}
+
+/* Box Styles */
+.showreel-box,
+.box,
+.box2 {
+  overflow-y: auto;
+  padding: 0 20px;
+  color: red;
+  border: 2px solid black;
+  border-radius: 25px;
+}
+
+.props-box {
+  overflow-y: auto;
+  padding: 0 20px;
+  background: goldenrod;
+  color:black;
+  border: 2px solid black;
+  border-radius: 25px;
+  height: 200px;
+}
+
+.script-box {
+  overflow-y: auto;
+  padding: 0 20px;
+  background: powderblue;
+  color:black;
+  border: 2px solid black;
+  border-radius: 25px;
+}
+
+#box-dialogue,
+#box-character {
+  overflow-y: auto;
+  padding: 0 20px;
+  background: #34aeeb;
+  color: white;
+  border: 4px solid silver;
+  border-radius: 25px;
+}
+
+.showreel-box {
+  height: 400px;
+  color: red;
+}
+
+.box {
+  height: 220px;
+}
+
+.box2 {
+  height: 200px;
+}
+
+/* Input Range Styles */
+input[type=range][orient=vertical] {
+  appearance: slider-vertical;
+  width: 10px;
+  height: 400px;
+  padding: 0 5px;
+}
+
+.fox-speaker {
+  background-image: url('../images/speaker.jpg');
+  background-size: cover; /* Adjusts the size of the background image to cover the entire element */
+  background-position: center; /* Positions the background image at the center of the element */
+  color: white;
+}
+
+.document-footer {
+  color: #444;
+}
+
+.nav-para {
+  margin: 0 4px 0 0;
+  font-size: 70%;
+}
+
+.scene-para {
+  margin-bottom: -4px;
+}
+
+#controls {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  width: 200px;
+  height: auto;
+  background-color: slategrey;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 100;
+  overflow-y: auto;
+  border-radius: 25px;
+}
+
+.breakdown-header {
+  margin-top: 4px;
+  padding-left: 10px;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.voice-sel {
+  width: 140px;
+}
+
+.blob {
+  background: black;
+  border-radius: 20px;
+  border: solid 1px red;
+  margin: 2px;
+  padding: 2px;
+  font-size: 80%;
+}

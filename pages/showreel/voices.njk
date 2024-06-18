@@ -1,0 +1,66 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+
+    <div class='row top'>
+        <!-- Hidden data elements -->
+        <p id='audioLength' hidden='hidden'>{{audioLength}}</p>
+        <p id='type_{{i}}' hidden='hidden'>{{element.type}}</p>
+        <p id='highestElement' hidden='hidden'>{{highestElement}}</p>
+        <p id='highestScene' hidden='hidden'>{{highestScene}}</p>
+        <p id='elementNumber' hidden='hidden'>{{elementNumber}}</p>
+        <p id='sceneNumber' hidden='hidden'>{{sceneNumber}}</p>
+        <p id='filmTitle' hidden='hidden'>{{title}}</p>
+    </div>
+    
+  <div class='row' id='tabhead'>
+    <!-- Hidden element for storing and retrieving the scroll position -->
+    <div class="col-md-3">
+      <audio id="master-play" controls="controls">
+        <source src="" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <div class="row tableFixHead3" id="tabhead">
+    <div class="col-md-12">
+      <table class="table-bordered table-sm table-dark table-grid" id="voice-table">
+        <thead>
+          <tr>
+            <th class="data-left">Name</th>
+            <th class="data-left">Accent</th>
+            <th class="data-left">Description</th>
+            <th class="data-left">Age</th>
+            <th class="data-left">Gender</th>
+            <th class="data-left">ID</th>
+            <th class="data-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(1, vox.length) -%}
+            <tr>
+              <td class="data-left">{{ vox[i].name }}</td>
+              <td class="data-left">{{ vox[i].accent | upper }}</td>
+              <td class="data-left">{{ vox[i].description | upper }}</td>
+              <td class="data-left">{{ vox[i].age | upper }}</td>
+              <td class="data-left" id="gender_{{ i }}">{{ vox[i].gender | upper }}</td>
+              <td class="data-left" id="id_{{ i }}">{{ vox[i].id }}</td>
+              <td class="data-left">
+                {% if vox[i].generated == 'yes' %}
+                  <!-- Play Sample button for generated entries -->
+                  <button class="btn-play-sample" value="{{ vox[i].id }}" id="btn-get-sample-ids_{{ i }}">Play Sample</button>
+                {% else %}
+                  <!-- Get Sample button for non-generated entries -->
+                  <button class="btn-get-sample" value="{{ vox[i].id }}" id="btn-get-sample-ids_{{ i }}">Get Sample</button>
+                {% endif %}
+              </td>
+            </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<script src='../js/showreel/parent.js'></script>
+<script src='../js/showreel/voices.js'></script>
+
+{% endblock %}

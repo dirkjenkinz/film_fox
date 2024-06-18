@@ -1,0 +1,106 @@
+{% extends "paperwork/paperwork.njk" %}
+
+{% block page %}
+  <!-- Header Section -->
+  <div class='row top' style='font-size: 90%;'>
+    <!-- Categories Table Section -->
+    <div class='col-md-4 tableFixHead3' style='background: black; border-radius: 25px;'>
+      <table id='table-categories'>
+        <thead>
+          <!-- Display All Button Section -->
+          <tr>
+            <th colspan='3'>
+               <button class='btn-edit' id='btn-display-all'>Display All</button>
+            </th>
+          </tr>
+          <!-- Add Category Section -->
+          <tr>
+            <th colspan='2' style='color:black;'>
+              <input type="text" name="category" id='input-category' size='25' style='border: 0;'>
+            </th>
+            <th>
+              <button class='btn-edit' id='btn-add-category' value=''>Add</button>
+            </th>
+          </tr>
+          <!-- Empty Row Section -->
+          <tr>
+            <th colspan='3' style='font-size:50%;'>&nbsp;</th>
+          </tr>
+        </thead>
+        <!-- Categories Table Body Section -->
+        <tbody>
+          {% for i in range(0, categories.length) -%}
+            <tr>
+              <!-- Category Name Column -->
+              <td>
+                {{categories[i][0]}}
+              </td>
+              <!-- Display Button Column -->
+              <td>
+                {% if categories[i][1] === 'y' %}
+                  <button class='btn-edit btn-display-category' value='{{categories[i][0]}}'>Display</button>
+                {% else %}
+                  &nbsp;
+                {% endif %}
+              </td>
+              <!-- Delete Button Column -->
+              <td>
+                {% if categories[i][1] === 'n' %}
+                  <button class='btn-edit btn-delete-category' value='{{categories[i][0]}}'>Delete</button>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class='col-md-1'>&nbsp;</div>
+
+    <!-- Display List Section -->
+    {% if category === '' %}
+      <div class='col-md-8 tableFixHead3' style='background: black; border-radius: 25px;'>
+        {% for i in range(0, list.length) -%}
+          <!-- Scene Breakdown Paragraph -->
+          <p class='scene-breakdown'>
+            {{list[i][0]}} --&nbsp;
+            {% for j in range(1, list[i].length) -%}
+              {% for k in range (0, list[i][j].length)%}
+                {% if k === 0 %}
+                  {{list[i][j][k]}}:
+                {% else %}
+                  {% if k < list[i][j].length - 1 %}
+                    {{list[i][j][k]}},
+                  {% else %}
+                    {{list[i][j][k]}}&nbsp;&nbsp;
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              ~&nbsp;
+            {% endfor %}
+          </p>
+        {% endfor %}
+      </div>
+    <!-- Display Category Section -->
+    {% else %}
+      <div class='col-md-8 tableFixHead3' style='background: black; border-radius: 25px;'>
+        <!-- Display Header Paragraph -->
+        <p class='display-header'>{{category}}</p>
+        {% for i in range(0, displayList.length) -%}
+          <!-- Scene Breakdown Paragraph for Displayed Category -->
+          <p class='scene-breakdown'>
+            {{displayList[i][0]}}
+            --
+            {% for j in range(1, displayList[i][1].length) -%}
+              {{displayList[i][1][j]}},
+            {% endfor %}
+          </p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+  <!-- JavaScript Script Tags -->
+  <script src='../js/paperwork/paperwork.js'></script>
+  <script src='../js/paperwork/categories.js'></script>
+{% endblock %}

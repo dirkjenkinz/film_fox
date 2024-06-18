@@ -1,0 +1,71 @@
+{% extends 'paperwork/paperwork.njk' %}
+{% block page %}
+
+  <div class='row'>
+    <div class='col-md-5'>  
+
+      <div class='row'>
+        <div class='col-md-12 paperwork-box'>
+          <button id='btn-shot-pdfs'>
+            Shot PDFs
+          </button>
+          <button id='btn-shot-spreadsheets'>
+            Shot Spreadsheets
+          </button>
+          <button class='btn-directory' value='{{shotDirectory}}'>
+            {{shotDirectory}}
+          </button>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-12 paperwork-box'>
+          <button id='btn-powerpoint'>
+            Powerpoint
+          </button>
+          <button class='btn-directory' value='{{powerpointDirectory}}'>
+            {{powerpointDirectory}}
+          </button>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-12 paperwork-box'>
+          <button id='btn-scene-list-spreadsheet'>
+            Scene List
+          </button>
+          <button class='btn-directory' value='{{sceneListDirectory}}'>
+            {{sceneListDirectory}}
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class='col-md-1'>&nbsp;</div>
+    <div class='col-md-3' style='background: white; color: black; border: 4px black solid; border-radius: 25px;'>
+      {% if showDirectory %}
+        {% for i in range(0, fileList1.length) %}
+          <p style='margin: -2px;'>
+            {{fileList1[i]}}
+          </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class='col-md-3' style='background: white; color: black; border: 4px black solid; border-radius: 25px;'>
+      {% if showDirectory %}
+        {% for i in range(0, fileList2.length) %}
+          <p style='margin: -2px;'>
+            {{fileList2[i]}}
+          </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class='row'>
+    &nbsp;
+  </div>
+
+  <script src='../js/paperwork/generate-paperwork.js'></script>
+  <script src='../js/paperwork/paperwork.js'></script>
+{% endblock %}

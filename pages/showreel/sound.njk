@@ -1,0 +1,113 @@
+{% extends "showreel/parent.njk" %}
+{% block page %}
+  <div class='row show'>
+    <div class='col-md-12 tableFixHead' id='col-uncompiled' hidden="hidden">
+      <table class='table-bordered table-sm table-dark table-grid' id='tab-uncompiled'>
+        <tbody>
+          <tr>
+            <td colspan='4'>
+              <button id='btn-return'>
+                Return
+              </button>
+            </td>
+          </tr>
+          {% for i in range(0, uncompiledList.length) -%}
+            <tr>
+              <td class='data-left'>{{ uncompiledList[i][0] }}.{{ uncompiledList[i][1] }}</td>
+              <td class='data-left'>{{ uncompiledList[i][2] }}</td>
+              <td class='data-left'>{{ uncompiledList[i][3] }}</td>
+              <td>
+                {% if uncompiledList[i][3] !== '' %}
+                  <button class='btn-compile' value='{{ uncompiledList[i] }}' id='btn-compile-{{ i }}'>
+                    Compile
+                  </button>
+                {% else %}
+                  &nbsp;
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class='row show sound-body'>
+    <p id='size' hidden="hidden">{{ size }}</p>
+    <div class='col-md-12 sound-body' id='col-banner'>
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_scenes'>
+        <tbody>
+          <tr>
+            <td class='table-data'>
+              {% if readyForMaster === 'yes' %}
+                <button class='btn-edit' id='btn-master'>Create/Update Master</button>
+              {% else %}
+                <button class='btn-edit' disabled="disabled">Create/Update Master</button>
+              {% endif %}
+            </td>
+            <td>&nbsp;</td>
+            <td class='table-data' colspan='2'>
+              {% if masterExists == 'yes' %}
+                <button class='btn-edit' id='btn-play-master'>Play Master</button>
+              {% else %}
+                <button class='btn-edit' id='btn-play-master' disabled="disabled">Play Master</button>
+              {% endif %}
+            </td>
+            <td colspan='2'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td colspan='2' class='table-data'>
+              &nbsp;&nbsp;&nbsp;
+              <audio id='master-play' controls="controls">
+                <source src='' type="audio/mpeg">
+              </audio>
+            </td>
+            <td>
+              {% if uncompiledList.length > 0 %}
+                <button class='btn-edit' id='btn-show-uncompiled'>
+                  Uncompiled Elements
+                </button>
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class='row sound-body'>
+    <div class='col-md-12' id='col-scenes'>
+      <table class='table-bordered table-sm table-dark table-grid' id='tab_img'>
+        <tbody>
+          {% for i in range(0, script.length, 8) -%}
+            <tr>
+              {% for num in range(0, 8) -%}
+                {% if i + num < script.length %}
+                  <td class='table-data'>
+                    {% if merged[i + num] != 'yes' %}
+                      {% if readyList[i + num] === 'yes' %}
+                        <button class='btn-merge' id='btn-merge_{{ i + num }}' value='{{ i + num }}'>Merge Scene
+                          {{ i + num }}</button>
+                      {% else %}
+                        <button disabled="disabled">Incomplete - Scene
+                          {{ i + num }}</button>
+                      {% endif %}
+                    {% else %}
+                      <button class='btn-play' id="play_{{ i + num }}" value='{{ i + num }}'>
+                        Play Scene
+                        {{ i + num }}
+                      </button>
+                    {% endif %}
+                  </td>
+                  <td colspan='2' class='table-data'>&nbsp;</td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            <tr>
+              <td style='font-size: 20%;'>&nbsp;</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src='../js/showreel/parent.js'></script>
+<script src='../js/showreel/sound.js'></script>
+{% endblock %}
