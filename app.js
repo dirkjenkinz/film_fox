@@ -62,7 +62,6 @@ const routers = {
     '/add-category': 'add-category.js',
     '/delete-category': 'delete-category.js',
     '/categories': 'categories.js',
-    '/compile-scene': 'compile-scene.js',
     '/generate-powerpoint': 'generate-powerpoint.js',
     '/show-gallery': 'show-gallery.js',
     '/delete-image': 'delete-image.js',
@@ -73,7 +72,8 @@ const routers = {
     '/update-api-key': 'update-api-key.js',
     '/generate-shot-pdfs': 'generate-shot-pdfs.js',
     '/generate-shot-spreadsheets': 'generate-shot-spreadsheets.js',
-    '/generate-scene-list-spreadsheet': 'generate-scene-list-spreadsheet.js'
+    '/generate-scene-list-spreadsheet': 'generate-scene-list-spreadsheet.js',
+    '/create-master': 'create-master.js',
 };
 
 // Attach routers to their respective endpoints

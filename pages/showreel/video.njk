@@ -6,6 +6,10 @@
     <div class='col-md-4'>
       <button class='btn-edit' id='btn-generate-all'>Generate/Overwrite All Scenes</button>
     </div>
+    <div class='col-md-4'>&nbsp;</div>
+    <div class='col-md-4'>
+      <button class='btn-edit' id='btn-create-master'>Create Master</button>
+    </div>
   </div>
 
   <div class='row tableFixHead3' id='tabhead'>
@@ -24,7 +28,7 @@
                     {% if completeArray[current] === 'no' %}
                       <button class='btn-edit btn-generate-elements' value="{{ current }}" id='btn-generate-elements-{{ current }}'>Generate elements</button>
                     {% else %}
-                      <button class='btn-blue btn-generate-elements' value="{{ current }}" id='btn-generate-elements-{{ current }}'>Refresh {{lengthList[current]}} elements</button>
+                      <button class='btn-blue btn-generate-elements' value="{{ current }}" id='btn-generate-elements-{{ current }}'>Refresh elements [{{lengthList[current]}}]</button>
                     {% endif %}
                   </td>
                   <td class='blue-box'>

@@ -48,6 +48,17 @@ $(document).ready(() => {
         console.error('Error handling btn-generate-all click:', error);
       }
     });
+
+    // Event handler for 'btn-generate-all' click
+    $('#btn-create-master').on('click', () => {
+      try {
+        const title = $('#filmTitle')[0].innerText;
+        window.location.href = `/create-master?title=${encodeURIComponent(title)}`;
+      } catch (error) {
+        console.error('Error handling btn-create-master click:', error);
+      }
+    });
+
   } catch (error) {
     console.error('Error executing document ready function:', error);
   }

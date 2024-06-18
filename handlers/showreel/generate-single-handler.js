@@ -66,9 +66,6 @@ const generateSingleHandler = async (req, res) => {
       case 'sound':
         redirectUrl = `/sound?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`;
         break;
-      case 'process-queue':
-        redirectUrl = `/process-queue?title=${title}`;
-        break;
     }
 
     setTimeout(() => {

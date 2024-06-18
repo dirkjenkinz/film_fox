@@ -35,7 +35,7 @@
     "mp3-duration": "^1.1.0",
     "node-crunker": "^0.0.4",
     "node-wav-player": "^0.2.0",
-    "nodemon": "^2.0.12",
+    "nodemon": "^2.0.22",
     "nunjucks": "^3.2.3",
     "pdf-creator-node": "^2.3.5",
     "pdfkit": "^0.14.0",
