@@ -94,15 +94,17 @@ const createVideoHandler = async (req, res) => {
       const num = `${sceneNumber}`.padStart(4, '0');
       const sub = `${index}`.padStart(4, '0');
       const sound = path.join(soundPath, `${num}_${sub}.mp3`);
+
+      if (s.type === 'movie') s.image = 'blank.png';
       const image = path.join(imagePath, s.image);
+      
       const output = path.join(outPath, `${num}_${sub}.mp4`);
 
       if (!s.image) {
         console.error(`Image for scene ${num}_${sub} is missing, skipping...`);
         continue;
       }
-await mergeMedia(image, sound, output);
-//await imgToMP4(sound, image, output);
+    await mergeMedia(image, sound, output);
     }
 
     res.redirect(`/video?title=${title}&sceneNumber=${sceneNumber}`);

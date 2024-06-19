@@ -84,9 +84,6 @@ let uncompiledList = [];
 
     let incomplete = [...new Set(uncompiledList.map(item => item[0]))];
 
-    console.log({incomplete});
-    console.log({readyList});  
-
     // Render the sound page with relevant data
     res.render('showreel/sound.njk', {
       title,
