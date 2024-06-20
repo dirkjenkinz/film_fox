@@ -25,7 +25,6 @@ const masterHandler = async (req, res) => {
 
     // Create a new instance of ffmpeg for concatenation
     const concat = ffmpeg();
-    console.log({ dirPath });
     // Iterate through the sound scenes and add them to the concatenation
     for (let i = 0; i < size; i++) {
       let fileName = `s${i.toString().padStart(5, '0')}.mp3`;

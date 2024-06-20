@@ -55,8 +55,20 @@ const concatenateSoundHandler = async (req, res) => {
     const elementNumber = u.query.elementNumber;
 
     const sc = sceneNumber.padStart(4, '0');
-    const mp3List = await getFileList(`data/${title}/sound/sounds/`, 'mp3');
+    const mxx = await getFileList(`data/${title}/sound/sounds/`, 'mp3');
+
+const mp3List = [];
+    mxx.forEach((mp3) => {
+      if (mp3.length === 13){
+        mp3List.push(mp3);
+      }
+    });
+
+console.log({mp3List});
+
     const comp = mp3List.filter((m) => m.startsWith(sc));
+
+    console.log({comp});
 
     await concatFiles(comp, sc, title);
 
