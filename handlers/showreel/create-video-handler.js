@@ -7,9 +7,7 @@ const ffmpegPath = require('ffmpeg-static');
 const { getFile } = require('../../services/file-service');
 const getAudioDurationInSeconds = require('get-audio-duration').getAudioDurationInSeconds;
 
-
 ffmpeg.setFfmpegPath(ffmpegPath);
-
 
 const mergeMedia = async (imagePath, audioPath, outputPath) => {
   try {
@@ -23,11 +21,13 @@ const mergeMedia = async (imagePath, audioPath, outputPath) => {
         '-c:v libx264',        // Use H.264 video codec
         '-tune stillimage',    // Tune for still image
         '-c:a aac',            // Use AAC audio codec
-        '-b:a 192k',           // Set audio bitrate
+        '-b:a 320k',           // Set higher audio bitrate for better quality
         '-pix_fmt yuv420p',    // Set pixel format
         '-t', audioDuration,   // Set the duration of the video to match the audio
-        '-vf scale=1280:720',  // Scale image to 1280x720 (16:9 aspect ratio)
+        '-vf scale=1920:1080', // Scale image to 1920x1080 (Full HD, 16:9 aspect ratio)
+        '-r 24',               // Set frame rate to 24 fps
       ])
+      .format('mov')           // Set output format to .mov
       .on('end', () => {
         console.log(`${outputPath} created`);
       })
@@ -38,33 +38,6 @@ const mergeMedia = async (imagePath, audioPath, outputPath) => {
   } catch (err) {
     console.error('Error getting audio duration:', err);
   }
-};
-
-const imgToMP4 = (sound, image, output) => {
-  return new Promise((resolve, reject) => {
-    ffmpeg()
-      .input(image)
-      .input(sound)
-      .inputFPS(1)
-      .outputFPS(25)
-      .audioCodec('aac')
-      .audioBitrate(128)
-      .videoBitrate('128k')
-      .videoCodec('libx264')
-      .size('720x?')
-      .aspect('16:9')
-      .format('mp4')
-      .output(output)
-      .on('end', () => {
-        console.log(`${output} created`);
-        resolve();
-      })
-      .on('error', (err) => {
-        console.error(`Error converting ${image}: ${err.message}`);
-        reject(err);
-      })
-      .run();
-  });
 };
 
 const createVideoHandler = async (req, res) => {
@@ -98,13 +71,13 @@ const createVideoHandler = async (req, res) => {
       if (s.type === 'movie') s.image = 'blank.png';
       const image = path.join(imagePath, s.image);
       
-      const output = path.join(outPath, `${num}_${sub}.mp4`);
+      const output = path.join(outPath, `${num}_${sub}.mov`);
 
       if (!s.image) {
         console.error(`Image for scene ${num}_${sub} is missing, skipping...`);
         continue;
       }
-    await mergeMedia(image, sound, output);
+      await mergeMedia(image, sound, output);
     }
 
     res.redirect(`/video?title=${title}&sceneNumber=${sceneNumber}`);

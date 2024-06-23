@@ -32,7 +32,7 @@ const generateSceneHandler = async (req, res) => {
     const sceneNumber = u.query.sceneNumber;
     const videoPath = path.join(__dirname, `../../data/${title}/vision/videos`);
     const scenesPath = path.join(__dirname, `../../data/${title}/vision/scenes`);
-    const blank = path.join(__dirname, '../../blank.mp4');
+    const blank = path.join(__dirname, '../../blank.mov');
 
     // Determine the range of scenes to generate based on the 'sceneNumber' parameter
     let start, end;
@@ -48,14 +48,14 @@ const generateSceneHandler = async (req, res) => {
     for (let scene = start; scene < end; scene++) {
       const sc = `0000${scene}`.slice(-4);
       const videoList = script[scene].map((_, index) => ({
-        fileName: `${videoPath}/${sc}_${('0000' + index).slice(-4)}.mp4`
+        fileName: `${videoPath}/${sc}_${('0000' + index).slice(-4)}.mov`
       }));
 
-      // Add blank videos to the end of the list for transitions
-   //   videoList.push({ fileName: blank }, { fileName: blank });
+      // Add blank video to the end of the list for transitions
+       videoList.push({ fileName: blank });
 
       // Define the output file path for the scene
-      const outputFile = `${scenesPath}/${sc}.mp4`;
+      const outputFile = `${scenesPath}/${sc}.mov`;
 
       try {
         // Use video-stitch library to concatenate video clips and generate the scene

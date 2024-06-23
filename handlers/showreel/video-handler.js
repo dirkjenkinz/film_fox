@@ -34,8 +34,8 @@ const videoHandler = async (req, res) => {
     const { script } = filmFoxFile;
 
     // Get the list of videos and scenes
-    const videoList = await getFileList(`data/${title}/vision/videos`, 'mp4');
-    const scenesList = await getFileList(`data/${title}/vision/scenes`, 'mp4');
+    const videoList = await getFileList(`data/${title}/vision/videos`, 'mov');
+    const scenesList = await getFileList(`data/${title}/vision/scenes`, 'mov');
     
     const lengthList = [];
 
@@ -46,7 +46,7 @@ const videoHandler = async (req, res) => {
     // Check video completion status for each scene
     const completenessArray = script.map((scene, sceneIndex) => 
       scene.every((_, elementIndex) => 
-        videoList.includes(`${sceneIndex.toString().padStart(4, '0')}_${elementIndex.toString().padStart(4, '0')}.mp4`))
+        videoList.includes(`${sceneIndex.toString().padStart(4, '0')}_${elementIndex.toString().padStart(4, '0')}.mov`))
         ? 'yes' : 'no'
     );
 
@@ -65,7 +65,7 @@ const videoHandler = async (req, res) => {
 
     // Check if each scene video exists
     const existsArray = script.map((_, sceneIndex) => 
-      scenesList.includes(`${sceneIndex.toString().padStart(4, '0')}.mp4`) ? 'yes' : 'no'
+      scenesList.includes(`${sceneIndex.toString().padStart(4, '0')}.mov`) ? 'yes' : 'no'
     );
 
     // Determine overall readiness status

@@ -63,10 +63,10 @@ const createMasterHandler = async (req, res) => {
     const { title } = parsedUrl.query;
 
     // Get the list of scene files
-    const scenesList = await getFileList(`data/${title}/vision/scenes/`, 'mp4');
+    const scenesList = await getFileList(`data/${title}/vision/scenes/`, 'mov');
 
     // Define paths for input files and output file
-    const outputFile = path.join(__dirname, `../../data/${title}/vision/scenes/master.mp4`);
+    const outputFile = path.join(__dirname, `../../data/${title}/vision/scenes/master.mov`);
     const inputPath = path.join(__dirname, `../../data/${title}/vision/scenes`);
 
     // Concatenate videos
