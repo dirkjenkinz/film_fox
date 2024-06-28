@@ -36,6 +36,25 @@ const showreelHandler = async (req, res) => {
     sceneNumber = Math.max(0, Math.min(sceneNumber, script.length - 1));
     elementNumber = Math.max(0, Math.min(elementNumber, script[sceneNumber].length - 1));
 
+    let shots = shotList[sceneNumber].lines;
+
+    shots.forEach((line) => {
+      console.log({line})
+    });
+
+    if (shots.length < 20){
+      for (let i = shots.length; i < 20; i++){
+        shots[i] = {
+          shot: '',
+          angle: '',
+          move: '',
+          audio: '',
+          subject: '',
+          description: ''
+        };
+      };
+    };
+
     const element = script[sceneNumber][elementNumber];
     const voice = element.voice;
 
@@ -52,10 +71,6 @@ const showreelHandler = async (req, res) => {
     charactersByScene[sceneNumber]?.forEach(char => {
       chars = chars.filter(c => c !== char);
     });
-
-    shotList[sceneNumber].lines.forEach((line) => {
-      console.log({line});
-    })
 
     // Render the showreel page with relevant data
     res.render('showreel/showreel.njk', {
@@ -79,7 +94,7 @@ const showreelHandler = async (req, res) => {
       msg: u.searchParams.get('msg'),
       voice,
       breakdown: breakdown[sceneNumber],
-      shots: shotList[sceneNumber].lines
+      shots,
     });
   } catch (error) {
     console.error(`Error in Showreel Handler: ${error.message}`);

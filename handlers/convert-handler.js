@@ -178,7 +178,7 @@ const convertHandler = async (req, res) => {
       // Create breakdown
       let breakdown = [];
       script.forEach((s, index) => {
-        breakdown.push([['Cast Members'],['Props'],['Set Dressing'],['Costumes'],['Music'],['Sounds'],['Makeup'],['Extras'],['Stunts']]);
+        breakdown.push([['Characters'],['Props'],['Set Dressing'],['Costumes'],['Music'],['Sounds'],['Makeup'],['Extras'],['Stunts']]);
       });
 
       // Set up directories

@@ -188,35 +188,39 @@
   <div class='row'>
     &nbsp;
   </div>
-  <div class='row'>
-    <div class='col-md-1'></div>
-    <div class='col-md-10'>
-      <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
-        <thead class="thead-light">
-          <tr>
-            <th>#</th>
-            <th>Shot</th>
-            <th>Angle</th>
-            <th>Move</th>
-            <th>Audio</th>
-            <th>Subject</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        {% for i in range(0, shots.length) %}
-          <tr>
-            <td>{{i}}</td>
-            <td>{{shots[i].shot}}</td>
-            <td>{{shots[i].angle}}</td>
-            <td>{{shots[i].move}}</td>
-            <td>{{shots[i].audio}}</td>
-            <td>{{shots[i].subject}}</td>
-            <td>{{shots[i].description}}</td>
-          </tr>
-        {% endfor %}
-      </table>
+
+  <div style="height: 200px; overflow: auto;">
+    <div class='row' id='shot-list'>
+
+      <div class='col-md-1'></div>
+      <div class='col-md-10'>
+        <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Shot</th>
+              <th>Angle</th>
+              <th>Move</th>
+              <th>Audio</th>
+              <th>Subject</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          {% for i in range(0, shots.length) %}
+            <tr>
+              <td>{{i}}</td>
+              <td>{{shots[i].shot}}</td>
+              <td>{{shots[i].angle}}</td>
+              <td>{{shots[i].move}}</td>
+              <td>{{shots[i].audio}}</td>
+              <td>{{shots[i].subject}}</td>
+              <td>{{shots[i].description}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class='col-md-1'></div>
     </div>
-    <div class='col-md-1'></div>
   </div>
 
   <div class='row'>
@@ -227,17 +231,17 @@
     <div class='col-md-1'></div>
     <div class='col-md-10'>
       <button class="accordion">Scene Breakdown</button>
-        <div class="panel">
-          {% for i in range(0, breakdown.length) %}
-            <h1>{{breakdown[i][0]}}</h1>
-            {% for j in range(1, breakdown[i].length) %}
-              {{breakdown[i][j]}}<br>
+      <div class="panel">
+        {% for i in range(0, breakdown.length) %}
+          <h1>{{breakdown[i][0]}}</h1>
+          {% for j in range(1, breakdown[i].length) %}
+            {{breakdown[i][j]}}<br>
             {%endfor%}
           {% endfor %}
         </div>
+      </div>
+      <div class='col-md-1'></div>
     </div>
-    <div class='col-md-1'></div>
-  </div>
 
     <!-- Include scripts -->
     <script>
