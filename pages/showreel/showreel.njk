@@ -98,7 +98,8 @@
         {% else %}
           <h5 class='data-showreel' style='text-align: center;'>NO SOUND</h5>
         {% endif %}
-        <p style='text-align: center; font-size: 120%; font-weight: bold; color:white; background:black;'>Voice: {{ element.voice }}</p>
+        <p style='text-align: center; font-size: 120%; font-weight: bold; color:white; background:black;'>Voice:
+          {{ element.voice }}</p>
         <button id="play-pause">Play Sound/Pause Sound</button>
         <button id="btn-mute">{{ mute }}
         </button>
@@ -184,32 +185,107 @@
       </div>
     </div>
   </div>
-  <!-- Include scripts -->
-  <script>
-    $(document).ready(function () {
-      // Create a new Howler.js sound instance
-      let sound = new Howl({
-        src: ['{{ audio }}'],
-        html5: true,
-        format: [
-          'ogg', 'mp3'
-        ],
-        autoplay: true, // Autoplay enabled
-        mute:{% if mute == 'MUTE' %}false
-        {% else %}
-          true{% endif %}
+  <div class='row'>
+    &nbsp;
+  </div>
+  <div class='row'>
+    <div class='col-md-1'></div>
+    <div class='col-md-10'>
+      <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Shot</th>
+            <th>Angle</th>
+            <th>Move</th>
+            <th>Audio</th>
+            <th>Subject</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        {% for i in range(0, shots.length) %}
+          <tr>
+            <td>{{i}}</td>
+            <td>{{shots[i].shot}}</td>
+            <td>{{shots[i].angle}}</td>
+            <td>{{shots[i].move}}</td>
+            <td>{{shots[i].audio}}</td>
+            <td>{{shots[i].subject}}</td>
+            <td>{{shots[i].description}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class='col-md-1'></div>
+  </div>
+
+  <div class='row'>
+    &nbsp;
+  </div>
+
+  <div class='row'>
+    <div class='col-md-1'></div>
+    <div class='col-md-10'>
+      <button class="accordion">Scene Breakdown</button>
+        <div class="panel">
+          {% for i in range(0, breakdown.length) %}
+            <h1>{{breakdown[i][0]}}</h1>
+            {% for j in range(1, breakdown[i].length) %}
+              {{breakdown[i][j]}}<br>
+            {%endfor%}
+          {% endfor %}
+        </div>
+    </div>
+    <div class='col-md-1'></div>
+  </div>
+
+    <!-- Include scripts -->
+    <script>
+      $(document).ready(function () {
+        // Create a new Howler.js sound instance
+        let sound = new Howl({
+          src: ['{{ audio }}'],
+          html5: true,
+          format: [
+            'ogg', 'mp3'
+          ],
+          autoplay: true, // Autoplay enabled
+          mute:{% if mute == 'MUTE' %}false
+          {% else %}
+            true{% endif %}
+        });
+
+        // Play/Pause button functionality
+        $('#play-pause').click(function () {
+          if (sound.playing()) {
+            sound.pause();
+          } else {
+            sound.play();
+          }
+        });
       });
 
-      // Play/Pause button functionality
-      $('#play-pause').click(function () {
-        if (sound.playing()) {
-          sound.pause();
-        } else {
-          sound.play();
-        }
-      });
-    });
-  </script>
-  <script src='../js/showreel/parent.js'></script>
-  <script src='../js/showreel/showreel.js'></script>
-{% endblock %}
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+          this
+            .classList
+            .toggle("active");
+
+          /* Toggle between hiding and showing the active panel */
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+    </script>
+    <script src='../js/showreel/parent.js'></script>
+    <script src='../js/showreel/showreel.js'></script>
+  {% endblock %}

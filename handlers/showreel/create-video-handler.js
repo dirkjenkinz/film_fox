@@ -4,7 +4,7 @@ const url = require('url');
 const path = require('path');
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('ffmpeg-static');
-const { getFile } = require('../../services/file-service');
+const { getFile, writeFile } = require('../../services/file-service');
 const getAudioDurationInSeconds = require('get-audio-duration').getAudioDurationInSeconds;
 
 ffmpeg.setFfmpegPath(ffmpegPath);
@@ -77,6 +77,10 @@ const createVideoHandler = async (req, res) => {
         console.error(`Image for scene ${num}_${sub} is missing, skipping...`);
         continue;
       }
+
+      filmFoxFile.queue.push([`${num}_${sub}`, s.image]);
+      console.log(filmFoxFile.queue);
+      await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
       await mergeMedia(image, sound, output);
     }
 

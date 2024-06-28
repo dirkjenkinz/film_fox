@@ -25,7 +25,7 @@ const showreelHandler = async (req, res) => {
     }
 
     const filmFoxFile = await getFile(`${title}/${title}.fff`);
-    const { script, shotList, charactersByScene, nonSpeakers, characterList } = filmFoxFile;
+    const { script, shotList, charactersByScene, nonSpeakers, characterList, breakdown } = filmFoxFile;
 
     if (elementNumber === -1) {
       sceneNumber--;
@@ -53,6 +53,10 @@ const showreelHandler = async (req, res) => {
       chars = chars.filter(c => c !== char);
     });
 
+    shotList[sceneNumber].lines.forEach((line) => {
+      console.log({line});
+    })
+
     // Render the showreel page with relevant data
     res.render('showreel/showreel.njk', {
       sceneNumber,
@@ -74,6 +78,8 @@ const showreelHandler = async (req, res) => {
       caller: 'showreel',
       msg: u.searchParams.get('msg'),
       voice,
+      breakdown: breakdown[sceneNumber],
+      shots: shotList[sceneNumber].lines
     });
   } catch (error) {
     console.error(`Error in Showreel Handler: ${error.message}`);
