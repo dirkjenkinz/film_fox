@@ -39,6 +39,7 @@
               <p id='start' hidden="hidden">{{start}}</p>
               <p id='finish' hidden="hidden">{{finish}}</p>
               <p id='element' hidden="hidden">{{element}}</p>
+              <p id='showSlider' hidden='hidden'>{{showSlider}}<p>
             </div>
             <div class='col-md-2' style='text-align: right;'>{{page}}</div>
           </div>
@@ -55,9 +56,28 @@
               <p class='nav-para' id='nav-paperwork'>PAPERWORK</p>
             </div>
             <div class='col-md-1'>
-                          <p class='nav-para' id='nav-front'>Front</p>
+              <p class='nav-para' id='nav-front'>Front</p>
             </div>
           </div>
+
+          {% if showSlider == 'yes' %}
+          <div class='row'>
+            <div class='col-md-1'></div>
+            <div class='col-md-10'>
+              <div class='slidecontainer'>
+                SCENE
+                <span id="output">{{ sceneNumber }}
+                  (element
+                  {{ elementNumber }}):&nbsp;
+                  {{ slug }}
+                </span>
+              </div>
+              <input type="range" min="0" max="{{ highestScene }}" value="{{ sceneNumber }}" id='slider-scene'/>
+            </div>
+            <div class='col-md-1'></div>
+          </div>
+          {% endif %}
+
         </div>
       {% endblock %}
       {% block page %}{% endblock %}

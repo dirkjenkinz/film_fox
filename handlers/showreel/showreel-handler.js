@@ -74,6 +74,7 @@ const showreelHandler = async (req, res) => {
 
     // Render the showreel page with relevant data
     res.render('showreel/showreel.njk', {
+      showSlider: 'yes',
       sceneNumber,
       elementNumber,
       title,
