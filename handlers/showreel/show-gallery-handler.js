@@ -35,7 +35,6 @@ const showGalleryHandler = async (req, res) => {
     const sceneNumber = parseInt(u.searchParams.get('sceneNumber'), 10);
     const elementNumber = parseInt(u.searchParams.get('elementNumber'), 10);
     const caller = u.searchParams.get('caller');
-    const mute = u.searchParams.get('mute');
 
     if (!title || isNaN(sceneNumber) || isNaN(elementNumber)) {
       console.error('Invalid input parameters');
@@ -78,7 +77,6 @@ const showGalleryHandler = async (req, res) => {
       images,
       caller,
       page: 'Show Gallery',
-      mute,
     });
   } catch (error) {
     console.error('Error in showGalleryHandler:', error);

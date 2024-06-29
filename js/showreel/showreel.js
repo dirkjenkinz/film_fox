@@ -1,20 +1,12 @@
 // Function to build the URL for various actions
 const buildUrl = (call, sceneNumber, elementNumber, speak) => {
-  const mute = $('#btn-mute')[0].innerText;
   const title = $('#filmTitle')[0].innerText;
-  return `/${call}?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&mute=${mute}&speak=${speak}`;
+  return `/${call}?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&speak=${speak}`;
 };
 
 $(() => {
   // Set 'Showreel' as active navigation
   $('#nav-showreel').addClass('active');
-
-  // Check if there is an audio source and play it
-  const audioSource = $('#audio')[0].innerText;
-  if (audioSource) {
- //   document.getElementById('master-play').setAttribute('src', audioSource);
-  //  document.getElementById('master-play').play();
-  }
 });
 
 $('#slider-scene').on('input', (e) => {
@@ -85,77 +77,6 @@ $('#btn-previous-element').on('click', () => {
   let sceneNumber = $('#sceneNumber')[0].innerText;
   let elementNumber = parseInt($('#elementNumber')[0].innerText) - 1;
   const url = buildUrl('showreel', sceneNumber, elementNumber, 'yes');
-  window.location.href = url;
-});
-
-// Toggle mute for audio
-$('#btn-mute').on('click', () => {
-  const muteButton = $('#btn-mute');
-  const audioElements = $('audio');
-
-  if (muteButton[0].innerText === 'MUTE') {
-    muteButton[0].innerText = 'UNMUTE';
-    audioElements.prop('muted', true);
-  } else {
-    muteButton[0].innerText = 'MUTE';
-    audioElements.prop('muted', false);
-  }
-});
-
-// Show/hide character-related elements
-$('#btn-add-character').on('click', () => {
-  const addButton = $('#btn-add-character');
-  const deleteButton = $('#btn-delete-character');
-  const charactersInSceneTable = $('#table-characters-in-scene');
-  const charactersTable = $('#table-characters');
-
-  if (addButton[0].innerText === 'Add Character') {
-    charactersInSceneTable.hide();
-    deleteButton[0].innerText = 'Delete Character';
-    charactersTable.show();
-    addButton[0].innerText = 'CANCEL';
-  } else {
-    charactersTable.hide();
-    addButton[0].innerText = 'Add Character';
-  }
-});
-
-// Show/hide character deletion confirmation
-$('#btn-delete-character').on('click', () => {
-  const deleteButton = $('#btn-delete-character');
-  const addButton = $('#btn-add-character');
-  const charactersTable = $('#table-characters');
-  const charactersInSceneTable = $('#table-characters-in-scene');
-
-  if (deleteButton[0].innerText === 'Delete Character') {
-    charactersTable.hide();
-    addButton[0].innerText = 'Add Character';
-    charactersInSceneTable.show();
-    deleteButton[0].innerText = 'CANCEL';
-  } else {
-    charactersInSceneTable.hide();
-    deleteButton[0].innerText = 'Delete Character';
-  }
-});
-
-// Event handlers for character-related actions
-$('.btn-add-character').on('click', (e) => {
-  // Add a character to the scene
-  const character = e.target.value;
-  const sceneNumber = $('#sceneNumber')[0].innerText;
-  const elementNumber = $('#elementNumber')[0].innerText;
-  let url = buildUrl('add-character-to-scene', sceneNumber, elementNumber, 'no');
-  url = `${url}&character=${character}`;
-  window.location.href = url;
-});
-
-$('.btn-delete-character').on('click', (e) => {
-  // Delete a character from the scene
-  const character = e.target.value;
-  const sceneNumber = $('#sceneNumber')[0].innerText;
-  const elementNumber = $('#elementNumber')[0].innerText;
-  let url = buildUrl('delete-character-from-scene', sceneNumber, elementNumber, 'no');
-  url = `${url}&character=${character}`;
   window.location.href = url;
 });
 

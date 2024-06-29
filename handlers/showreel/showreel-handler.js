@@ -17,7 +17,6 @@ const showreelHandler = async (req, res) => {
     const title = u.searchParams.get('title');
     let sceneNumber = parseInt(u.searchParams.get('sceneNumber'), 10) || 0;
     let elementNumber = parseInt(u.searchParams.get('elementNumber'), 10) || 0;
-    const mute = u.searchParams.get('mute') || 'MUTE';
 
     if (!title) {
       res.status(400).send('Title parameter is required');
@@ -79,7 +78,6 @@ const showreelHandler = async (req, res) => {
       elementNumber,
       title,
       element,
-      mute,
       audio,
       audioComplete,
       characters: chars.sort(),

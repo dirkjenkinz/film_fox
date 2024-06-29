@@ -31,7 +31,7 @@ const updateNoteHandler = async (req, res) => {
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
     // Redirect based on the caller
-    let redirectUrl = `/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&mute=mute&speak=yes`;
+    let redirectUrl = `/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&speak=yes`;
     if (caller === 'scenes') {
       redirectUrl = `/scenes?title=${title}`;
     } else if (caller === 'shot-list') {

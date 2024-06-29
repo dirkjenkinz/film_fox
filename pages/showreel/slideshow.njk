@@ -48,7 +48,7 @@
                         <!-- Showreel video/image content -->
                         <td class='data-showreel' id='image_{{ i }}' style='border: white 4px solid; text-align:right;'>
                             {% if element.type === 'movie' %}
-                                <video width='420' height='240' controls="controls" autoplay="autoplay" muted="muted" id='image_{{ i }}' class='image'>
+                                <video width='420' height='240' controls="controls" autoplay="autoplay" id='image_{{ i }}' class='image'>
                                     <source src='../data/{{ title }}/vision/images/{{ element.image }}' type='video/mp4'>
                                 </video>
                             {% elseif element.type === 'still' %}

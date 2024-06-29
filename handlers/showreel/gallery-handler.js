@@ -16,7 +16,7 @@ const galleryHandler = async (req, res) => {
   try {
     // Parse query parameters from the request URL
     const u = parse(req.originalUrl, true);
-    const { sceneNumber, title, elementNumber, caller, mute, speak } = u.query;
+    const { sceneNumber, title, elementNumber, caller, speak } = u.query;
 
     if (!title) {
       res.status(400).send('Missing required parameter: title');
@@ -63,7 +63,6 @@ const galleryHandler = async (req, res) => {
       unused,
       caller,
       page: 'Gallery',
-      mute,
       speak,
     });
   } catch (error) {

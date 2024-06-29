@@ -45,7 +45,7 @@
                   <!-- Display image or video based on type -->
                   <td class='data-left' id='image-{{i + num}}' colspan='3' width='25%'>
                     {% if images[i + num][1] === 'movie' %}
-                      <video width='480' height='270' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                      <video width='480' height='270' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img'>
                         <source src='../data/{{title}}/vision/images/{{images[i + num][0]}}' type='video/mp4'>
                       </video>
                     {% else %}

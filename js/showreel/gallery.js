@@ -21,9 +21,8 @@ $('.btn-select').on('click', (e) => {
 // Click event for canceling image selection
 $('.btn-cancel').on('click', () => {
   const speak = $('#speak')[0].innerText;
-  const mute = $('#mute')[0].innerText;
   const url = buildUrl('showreel', '', '');
-  window.location.href = `${url}&speak=${speak}&mute=${mute}`;
+  window.location.href = `${url}&speak=${speak}`;
 });
 
 // Keypress event for searching

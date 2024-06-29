@@ -15,7 +15,6 @@ const generateSingleHandler = async (req, res) => {
     const character = params.get('character');
     const caller = params.get('caller');
     const voice = params.get('voice');
-    const mute = params.get('mute');
 
     if (!title || sceneNumber < 0 || elementNumber < 0 || !voice) {
       console.error('Missing or invalid parameters');
@@ -58,7 +57,7 @@ const generateSingleHandler = async (req, res) => {
       msg = 'OK';
     }
 
-    let redirectUrl = `/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&speak=yes&mute=${mute}&msg=${msg}`;
+    let redirectUrl = `/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&speak=yes&msg=${msg}`;
     switch (caller) {
       case 'edit-character':
         redirectUrl = `/edit-character?title=${title}&character=${character}&msg=${msg}`;

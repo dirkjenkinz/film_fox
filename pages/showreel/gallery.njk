@@ -35,7 +35,7 @@
                   <!-- Display UNUSED image or video -->
                   <td class='data-left' id='unused-image-{{i + num}}'>
                     {% if unused[i + num][1] === 'movie' %}
-                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img'>
                         <source src='../data/{{title}}/vision/images/{{unused[i + num][0]}}' type='video/mp4'>
                       </video>
                     {% else %}
@@ -76,7 +76,7 @@
                   <!-- Display USED image or video -->
                   <td class='data-left' id='used-image-{{i + num}}'>
                     {% if used[i + num][1] === 'movie' %}
-                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img' muted='muted'>
+                      <video width='240' height='135' controls='controls' autoplay='autoplay' id='img_{{i + num}}' class='img'>
                         <source src='../data/{{title}}/vision/images/{{used[i + num][0]}}' type='video/mp4'>
                       </video>
                     {% else %}

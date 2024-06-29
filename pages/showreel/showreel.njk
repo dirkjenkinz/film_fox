@@ -17,45 +17,6 @@
     </div>
   </div>
 
-  <div class='row' id='character-handling' hidden="hidden">
-    <div class='col-md-3' id='add-characters'>
-      <span class='char-box'>Click character to add to scene</span>
-      <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;' id='tab_characters'>
-        {% for i in range(0, characters.length) -%}
-          <tr>
-            <td>
-              <button class='btn-add-character' id='btn-add-character' value='{{ characters[i] }}'>
-                {{ characters[i] }}
-              </button>
-            </td>
-          </tr>
-        {% endfor %}
-      </table>
-    </div>
-    <div class='col-md-3' id='delete-characters'>
-      <span class='char-box'>Click character to remove from scene</span>
-      <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;' id='tab_characters'>
-        {% for i in range(0, characterList.length) -%}
-          {% if characterList[i] !== 'NARRATOR' %}
-            <tr>
-              <td>
-                <button class='btn-delete-character' id='btn-delete-character' value='{{ characterList[i] }}'>
-                  {{ characterList[i] }}
-                </button>
-              </td>
-            </tr>
-          {% endif %}
-        {% endfor %}
-      </table>
-    </div>
-    <div class='col-md-6'>
-      <br>
-      <button id='btn-hide-characters'>
-        RETURN
-      </button>
-    </div>
-  </div>
-
   <br>
   <div class='row' id='main'>
     <div class='col-md-5'>
@@ -63,7 +24,7 @@
       <textarea id="input-note" name="note" rows="3" cols="60">{{ note }}</textarea>
       {{ element.image }}
       {% if element.type === 'movie' %}
-        <video width='420' height='240' controls='controls' autoplay='autoplay' id='image_{{ i }}' class='image' muted='muted'>
+        <video width='420' height='240' controls='controls' autoplay='autoplay' id='image_{{ i }}' class='image'>
           <source src='../data/{{ title }}/vision/images/{{ element.image }}' type='video/mp4'>
         </video>
       {% elseif element.type === 'still' %}
@@ -90,7 +51,6 @@
         <p style='text-align: center; font-size: 120%; font-weight: bold; color:white; background:black;'>Voice:
           {{ element.voice }}</p>
         <button id="play-pause">Play Sound/Pause Sound</button>
-        <button id="btn-mute">{{ mute }}
         </button>
         <!-- Button to delete or generate sound -->
         {% if audio %}
@@ -154,26 +114,6 @@
       </div>
     </div>
 
-    <div class='col-md-3'>
-      <div id='box-character'>
-        <!-- Buttons to add or delete characters -->
-        <button id='btn-show-characters'>
-          CHARACTERS
-        </button>
-        <!-- Display characters in the scene -->
-        <br>
-        {% for i in range(0, characterList.length) -%}
-          {% if characterList[i] !== 'NARRATOR' %}
-            {% if i < (characterList.length - 1) %}
-              {{ characterList[i] }}<br>
-            {% else %}
-              {{ characterList[i] }}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
   <div class='row'>
     &nbsp;
   </div>
@@ -241,11 +181,7 @@
           html5: true,
           format: [
             'ogg', 'mp3'
-          ],
-          autoplay: true, // Autoplay enabled
-          mute:{% if mute == 'MUTE' %}false
-          {% else %}
-            true{% endif %}
+          ]
         });
 
         // Play/Pause button functionality

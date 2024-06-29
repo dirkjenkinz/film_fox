@@ -13,7 +13,6 @@ const deleteHandler = async (req, res) => {
     const title = urlObj.searchParams.get('title');
     const sceneNumber = urlObj.searchParams.get('sceneNumber');
     const elementNumber = urlObj.searchParams.get('elementNumber');
-    const mute = urlObj.searchParams.get('mute');
     const soundName = urlObj.searchParams.get('fileName');
 
     if (!title || !soundName) {
@@ -31,7 +30,7 @@ const deleteHandler = async (req, res) => {
 
     await deleteFile(filePath);
 
-    res.redirect(`/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&mute=${mute}`);
+    res.redirect(`/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`);
   } catch (error) {
     console.error(`Error deleting file: ${error.message}, Title: ${title}, Sound Name: ${soundName}`);
     res.status(500).send('Internal Server Error');
