@@ -1,0 +1,97 @@
+<div class='row' id='shot-list' style="height: 400px; overflow: auto; background:green; padding:4px 0 4px 0;">
+  <div class='col-md-12'>
+    <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
+      <thead class="thead-light" id='shot-table-header'>
+        <tr>
+          <th width='5%'></th>
+          <th width='4%'>Shot #</th>
+          <th width='5%'>Shot</th>
+          <th width='12%'>Angle</th>
+          <th width='10%'>Move</th>
+          <th width='10%'>Audio</th>
+          <th width='20%'>Subject</th>
+          <th width='20%'>Description</th>
+          <th width='5%'></th>
+        </tr>
+      </thead>
+      {% for i in range(0, shots.length) %}
+        <tr>
+          <td>
+            <button class='btn-delete-shot' id='delete-shot{{ i }}' value='{{i}}'>Delete</button>
+          </td>
+          <td>{{i + 1}}</td>
+          <td class='data-left'>
+            <select id='shot-shot_{{i}}' class='shot-select shot-shot'>
+              {% for index in range(0, shotTypes.length) -%}
+                {% if shotTypes[index] == lines[i].shot %}
+                  <option value='{{shotTypes[index]}}' selected="selected">
+                    {{shotTypes[index]}}
+                  </option>
+                {% else %}
+                  <option value='{{shotTypes[index]}}'>
+                    {{shotTypes[index]}}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </td>
+
+          <td class='data-left'>
+            <select id='shot-angle_{{i}}' class='shot-select shot-angle'>
+              {% for index in range(0, angles.length) -%}
+                {% if angles[index] === lines[i].angle %}
+                  <option value='{{angles[index]}}' selected="selected">
+                    {{angles[index]}}
+                  </option>
+                {% else %}
+                  <option value='{{angles[index]}}'>
+                    {{angles[index]}}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </td>
+          <td class='data-left'>
+            <select name="move_{{i}}" id='shot-move_{{i}}' class='shot-select'>
+              {% for index in range(0, moves.length) -%}
+                {% if moves[index] == lines[i].move %}
+                  <option value='{{moves[index]}}' selected="selected">
+                    {{moves[index]}}
+                  </option>
+                {% else %}
+                  <option value='{{moves[index]}}'>
+                    {{moves[index]}}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </td>
+          <td class='data-left'>
+            <select name="audio{{i}}" id='shot-audio_{{i}}' class='shot-select'>
+              {% for index in range(0, audioTypes.length) -%}
+                {% if audioType[index] == lines[i].audio %}
+                  <option value='{{audio[index]}}' selected="selected">
+                    {{audioTypes[index]}}
+                  </option>
+                {% else %}
+                  <option value='{{audio[index]}}'>
+                    {{audioTypes[index]}}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <textarea id='shot-subject_{{i}}' class='shot-subject' rows='1' cols='30'>{{lines[i].subject | trim}}</textarea>
+          </td>
+          <td>
+            <textarea id='shot-description_{{i}}' class='shot-description' rows='1' cols='30'>{{lines[i].description | trim}}</textarea>
+          </td>
+          <td>
+            <button class='btn-add-shot' id='add-shot{{ i }}' value='{{i}}'>Add</button>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
