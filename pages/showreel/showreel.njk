@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <br>
+  <br><br>
   <div class='row' id='main'>
     <div class='col-md-2'>
       {% if sceneNumber > 0 %}
@@ -91,7 +91,7 @@
 
     <div class='col-md-2' id='col-note'>
       NOTE:<br>
-      <textarea id="input-note" name="note" rows="8" cols="20">{{ note }}</textarea>
+      <textarea id="input-note" name="note" rows="12" cols="20">{{ note }}</textarea>
     </div>
   </div>
   <!-- end of row (main) -->
@@ -129,39 +129,39 @@
   <br><br>
 
   <div class='row'>
-    <div style="height: 200px; overflow: auto; background:green; padding:4px 0 4px 0;">
-      <div class='row' id='shot-list'>
-        <div class='col-md-1'></div>
-        <div class='col-md-10'>
-          <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
-            <thead class="thead-light">
-              <tr>
-                <th width='5%'>Shot #</th>
-                <th>Shot</th>
-                <th>Angle</th>
-                <th>Move</th>
-                <th>Audio</th>
-                <th>Subject</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            {% for i in range(0, shots.length) %}
-              <tr>
-                <td>&nbsp;&nbsp;{{i}}</td>
-                <td>{{shots[i].shot}}</td>
-                <td>{{shots[i].angle}}</td>
-                <td>{{shots[i].move}}</td>
-                <td>{{shots[i].audio}}</td>
-                <td>{{shots[i].subject}}</td>
-                <td>{{shots[i].description}}</td>
-              </tr>
-            {% endfor %}
-          </table>
-        </div>
-        <div class='col-md-1'></div>
+  <div style="height: 400px; overflow: auto; background:green; padding:4px 0 4px 0;">
+    <div class='row' id='shot-list'>
+      <div class='col-md-1'></div>
+      <div class='col-md-10'>
+        <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
+          <thead class="thead-light" id='shot-table-header'>
+            <tr>
+              <th width='5%'>Shot #</th>
+              <th>Shot</th>
+              <th>Angle</th>
+              <th>Move</th>
+              <th>Audio</th>
+              <th>Subject</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          {% for i in range(0, shots.length) %}
+          <tr>
+            <td>&nbsp;&nbsp;{{i}}</td>
+            <td>{{shots[i].shot}}</td>
+            <td>{{shots[i].angle}}</td>
+            <td>{{shots[i].move}}</td>
+            <td>{{shots[i].audio}}</td>
+            <td>{{shots[i].subject}}</td>
+            <td>{{shots[i].description}}</td>
+          </tr>
+          {% endfor %}
+        </table>
       </div>
+      <div class='col-md-1'></div>
     </div>
   </div>
+</div>
 
   <br><br>
 

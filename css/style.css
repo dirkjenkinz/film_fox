@@ -249,6 +249,7 @@ html {
 /* Slider Styles */
 .slidecontainer {
   width: 100%;
+  background:purple;
 }
 
 .slider {
@@ -639,4 +640,11 @@ input[type=range][orient=vertical] {
   color:black;
   display: none;
   overflow: hidden;
+}
+
+#shot-table-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f8f9fa; /* Adjust as needed */
 }
