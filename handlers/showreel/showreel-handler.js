@@ -37,10 +37,6 @@ const showreelHandler = async (req, res) => {
 
     let shots = shotList[sceneNumber].lines;
 
-    shots.forEach((line) => {
-      console.log({line})
-    });
-
     if (shots.length < 20){
       for (let i = shots.length; i < 20; i++){
         shots[i] = {
