@@ -3,6 +3,31 @@
 const url = require('url');
 const { getFile, getFileList } = require('../../services/file-service');
 
+// Constants for shot, angles, moves, and audio options
+const shotTypes = ['-', 'WS', 'VWS', 'MS', 'MCU', 'XCU', 'CU'];
+const angles = [
+  '-',
+  'Eye Level',
+  'High Angle',
+  'Low Angle',
+  'Dutch Angle/Tilt',
+  'Over The Shoulder',
+  'Birds-Eye View',
+  'Point of View',
+];
+const moves = [
+  '-',
+  'Static',
+  'Pan',
+  'Tilt',
+  'Dolly',
+  'Crane/Boom',
+  'Handheld',
+  'Zoom',
+  'Rack Focus',
+];
+const audioTypes = ['-', 'Boom', 'Lavs', 'Lavs and Boom', 'Voice Over (VO)'];
+
 /**
  * Handles the showreel requests by rendering the showreel page with relevant data.
  * 
@@ -67,6 +92,9 @@ const showreelHandler = async (req, res) => {
       chars = chars.filter(c => c !== char);
     });
 
+    const size = shotList.length - 1;
+    const slug = script[sceneNumber][0].dialogue;
+
     // Render the showreel page with relevant data
     res.render('showreel/showreel.njk', {
       showSlider: 'yes',
@@ -89,7 +117,16 @@ const showreelHandler = async (req, res) => {
       msg: u.searchParams.get('msg'),
       voice,
       breakdown: breakdown[sceneNumber],
+      lines: shotList[sceneNumber].lines,
       shots,
+      shotTypes,
+      audioTypes,
+      angles,
+      moves,
+      audio,
+      note: shotList[sceneNumber].note,
+      slug,
+      size,
     });
   } catch (error) {
     console.error(`Error in Showreel Handler: ${error.message}`);

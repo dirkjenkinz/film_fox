@@ -250,6 +250,7 @@ html {
 .slidecontainer {
   width: 100%;
   background:purple;
+  padding-left: 8px;
 }
 
 .slider {
