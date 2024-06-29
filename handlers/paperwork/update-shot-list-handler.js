@@ -31,7 +31,7 @@ const updateShotListHandler = async (req, res) => {
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
     // Redirect to the scene shot list
-    res.redirect(`/scene-shot-list?title=${title}&sceneNumber=${sceneNumber}`);
+    res.redirect(`/showreel?title=${title}&sceneNumber=${sceneNumber}`);
   } catch (error) {
     // Log and handle errors
     console.error(`Error in updateShotListHandler: ${error}`);

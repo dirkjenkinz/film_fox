@@ -649,3 +649,8 @@ input[type=range][orient=vertical] {
   z-index: 1;
   background-color: #f8f9fa; /* Adjust as needed */
 }
+
+.breakdown-box {
+  background: rgb(51, 97, 215);
+  border: double 3px white;
+}

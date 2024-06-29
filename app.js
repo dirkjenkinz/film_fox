@@ -42,7 +42,6 @@ const routers = {
     '/edit-character': 'edit-character.js',
     '/voices': 'voices.js',
     '/get-samples': 'get-samples.js',
-    '/scene-shot-list': 'scene-shot-list.js',
     '/update-shot-list': 'update-shot-list.js',
     '/add-shot': 'add-shot.js',
     '/delete-shot': 'delete-shot.js',

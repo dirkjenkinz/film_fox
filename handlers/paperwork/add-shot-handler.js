@@ -38,8 +38,7 @@ const addShotHandler = async (req, res) => {
     // Writing the updated filmFoxFile back to the file
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
-    // Redirecting to the scene-shot-list page with updated parameters
-    res.redirect(`/scene-shot-list?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`);
+    res.redirect(`/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`);
   } catch (error) {
     // Handling errors and sending a 500 Internal Server Error response
     console.error(`Error in addShotHandler: ${error}`);

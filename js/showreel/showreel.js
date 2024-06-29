@@ -80,6 +80,7 @@ $('#btn-previous-element').on('click', () => {
   window.location.href = url;
 });
 
+
 // Update note on focus out
 $('#input-note').on('focusout', (e) => {
   const value = e.target.value;

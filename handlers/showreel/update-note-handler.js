@@ -35,7 +35,7 @@ const updateNoteHandler = async (req, res) => {
     if (caller === 'scenes') {
       redirectUrl = `/scenes?title=${title}`;
     } else if (caller === 'shot-list') {
-      redirectUrl = `/scene-shot-list?title=${title}&sceneNumber=${sceneNumber}`;
+      redirectUrl = `/showreel?title=${title}&sceneNumber=${sceneNumber}`;
     }
     res.redirect(redirectUrl);
   } catch (error) {

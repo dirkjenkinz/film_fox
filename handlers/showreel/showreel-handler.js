@@ -62,19 +62,6 @@ const showreelHandler = async (req, res) => {
 
     let shots = shotList[sceneNumber].lines;
 
-    if (shots.length < 20){
-      for (let i = shots.length; i < 20; i++){
-        shots[i] = {
-          shot: '',
-          angle: '',
-          move: '',
-          audio: '',
-          subject: '',
-          description: ''
-        };
-      };
-    };
-
     const element = script[sceneNumber][elementNumber];
     const voice = element.voice;
 

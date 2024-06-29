@@ -130,19 +130,16 @@
   <br><br>
 
   <div class='row'>
-    <div class='col-md-1'></div>
-    <div class='col-md-10'>
-      <button class="accordion">Scene Breakdown</button>
-      <div class="panel">
-        {% for i in range(0, breakdown.length) %}
-          <h1>{{breakdown[i][0]}}</h1>
+    <div class='col-md-12'>
+      {% for i in range(0, breakdown.length) %}
+        <div class='breakdown-box'>
+          <h3>{{breakdown[i][0]}}</h3>
           {% for j in range(1, breakdown[i].length) %}
             {{breakdown[i][j]}}<br>
             {%endfor%}
-          {% endfor %}
-        </div>
+          </div>
+        {% endfor %}
       </div>
-      <div class='col-md-1'></div>
     </div>
 
     <!-- Include scripts -->
@@ -188,4 +185,5 @@
     </script>
     <script src='../js/showreel/parent.js'></script>
     <script src='../js/showreel/showreel.js'></script>
+    <script src='../js/showreel/shot-list.js'></script>
   {% endblock %}

@@ -33,14 +33,6 @@ $('#nav-showreel').on('click', () => {
   window.location.href = `/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`;
 });
 
-// Event handler for the scene shot list navigation
-$('#nav-scene-shot-list').on('click', () => {
-  const sceneNumber = $('#sceneNumber').text();
-  const elementNumber = $('#elementNumber').text();
-  const url = buildParentUrl('scene-shot-list', sceneNumber, elementNumber);
-  window.location.href = url;
-});
-
 // Event handler for the breakdown navigation
 $('#nav-breakdown').on('click', () => {
   const sceneNumber = $('#sceneNumber').text();

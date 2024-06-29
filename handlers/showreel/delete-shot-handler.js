@@ -36,7 +36,7 @@ const deleteShotHandler = async (req, res) => {
 
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
-    res.redirect(`/scene-shot-list?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`);
+    res.redirect(`/showreel?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`);
   } catch (error) {
     console.error(`Error deleting shot: ${error.message}`);
     res.status(500).send('Internal Server Error');
