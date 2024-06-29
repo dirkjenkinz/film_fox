@@ -10,7 +10,7 @@
     {% for i in range(0, script.length) %}
       <p id='type_{{ i }}' hidden="hidden">{{ script[i].type }}</p>
     {% endfor %}
-    <div class="col-md-12" id='message' hidden="hidden" style='background:white; text-align: center; colour:red;'>
+    <div class="col-md-12" id='message' hidden="hidden" style='background:white; text-align: center; color:red;'>
       <br><br><br>
       <h1 style='color:red;'>Processing... Please wait.</h1>
       <br><br><br>
@@ -51,7 +51,6 @@
         <p style='text-align: center; font-size: 120%; font-weight: bold; color:white; background:black;'>Voice:
           {{ element.voice }}</p>
         <button id="play-pause">Play Sound/Pause Sound</button>
-        </button>
         <!-- Button to delete or generate sound -->
         {% if audio %}
           <button class='btn-del' id='del_{{ elementNumber }}' value='{{ element.sound }}'>
@@ -113,48 +112,46 @@
         </div>
       </div>
     </div>
-
-  <div class='row'>
-    &nbsp;
   </div>
 
-  <div style="height: 200px; overflow: auto;">
-    <div class='row' id='shot-list'>
+  <br><br>
 
-      <div class='col-md-1'></div>
-      <div class='col-md-10'>
-        <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
-          <thead class="thead-light">
-            <tr>
-              <th>#</th>
-              <th>Shot</th>
-              <th>Angle</th>
-              <th>Move</th>
-              <th>Audio</th>
-              <th>Subject</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          {% for i in range(0, shots.length) %}
-            <tr>
-              <td>{{i}}</td>
-              <td>{{shots[i].shot}}</td>
-              <td>{{shots[i].angle}}</td>
-              <td>{{shots[i].move}}</td>
-              <td>{{shots[i].audio}}</td>
-              <td>{{shots[i].subject}}</td>
-              <td>{{shots[i].description}}</td>
-            </tr>
-          {% endfor %}
-        </table>
+  <div class='row'>
+    <div style="height: 200px; overflow: auto; background:green; padding:4px 0 4px 0;">
+      <div class='row' id='shot-list'>
+        <div class='col-md-1'></div>
+        <div class='col-md-10'>
+          <table class='table-bordered table-sm table-dark table-grid' style='table-layout: fixed;'>
+            <thead class="thead-light">
+              <tr>
+                <th width='5%'>Shot #</th>
+                <th>Shot</th>
+                <th>Angle</th>
+                <th>Move</th>
+                <th>Audio</th>
+                <th>Subject</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            {% for i in range(0, shots.length) %}
+              <tr>
+                <td>&nbsp;&nbsp;{{i}}</td>
+                <td>{{shots[i].shot}}</td>
+                <td>{{shots[i].angle}}</td>
+                <td>{{shots[i].move}}</td>
+                <td>{{shots[i].audio}}</td>
+                <td>{{shots[i].subject}}</td>
+                <td>{{shots[i].description}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class='col-md-1'></div>
       </div>
-      <div class='col-md-1'></div>
     </div>
   </div>
 
-  <div class='row'>
-    &nbsp;
-  </div>
+  <br><br>
 
   <div class='row'>
     <div class='col-md-1'></div>
@@ -179,9 +176,7 @@
         let sound = new Howl({
           src: ['{{ audio }}'],
           html5: true,
-          format: [
-            'ogg', 'mp3'
-          ]
+          format: ['ogg', 'mp3']
         });
 
         // Play/Pause button functionality
