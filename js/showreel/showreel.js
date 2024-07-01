@@ -1,7 +1,7 @@
 // Function to build the URL for various actions
-const buildUrl = (call, sceneNumber, elementNumber, speak) => {
+const buildUrl = (call, sceneNumber, elementNumber) => {
   const title = $('#filmTitle')[0].innerText;
-  return `/${call}?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}&speak=${speak}`;
+  return `/${call}?title=${title}&sceneNumber=${sceneNumber}&elementNumber=${elementNumber}`;
 };
 
 $(() => {
@@ -24,7 +24,7 @@ $('#slider-scene').on('input', (e) => {
 $('#slider-scene').on('change', (e) => {
   // Handle slider change for 'Showreel'
   const sceneNumber = e.target.value;
-  const url = buildUrl('showreel', sceneNumber, 0, 'yes');
+  const url = buildUrl('showreel', sceneNumber, 0);
   window.location.href = url;
 });
 
@@ -50,7 +50,7 @@ $('#btn-next-element').on('click', () => {
   if (currentElementNumber < highestElementNumber) {
     const elementNumber = currentElementNumber + 1;
     const sceneNumber = parseInt($('#sceneNumber')[0].innerText);
-    const url = buildUrl('showreel', sceneNumber, elementNumber, 'yes');
+    const url = buildUrl('showreel', sceneNumber, elementNumber);
     window.location.href = url;
   } else {
     $('#btn-next-scene').trigger('click');
@@ -61,14 +61,14 @@ $('#btn-next-scene').on('click', () => {
   // Move to the next scene
   const elementNumber = 0;
   const sceneNumber = parseInt($('#sceneNumber')[0].innerText) + 1;
-  const url = buildUrl('showreel', sceneNumber, elementNumber, 'yes');
+  const url = buildUrl('showreel', sceneNumber, elementNumber);
   window.location.href = url;
 });
 
 $('#btn-previous-scene').on('click', () => {
   // Move to the previous scene
   const sceneNumber = parseInt($('#sceneNumber')[0].innerText) - 1;
-  const url = buildUrl('showreel', sceneNumber, 0, 'yes');
+  const url = buildUrl('showreel', sceneNumber, 0);
   window.location.href = url;
 });
 
@@ -76,7 +76,7 @@ $('#btn-previous-element').on('click', () => {
   // Move to the previous element
   let sceneNumber = $('#sceneNumber')[0].innerText;
   let elementNumber = parseInt($('#elementNumber')[0].innerText) - 1;
-  const url = buildUrl('showreel', sceneNumber, elementNumber, 'yes');
+  const url = buildUrl('showreel', sceneNumber, elementNumber);
   window.location.href = url;
 });
 
@@ -86,7 +86,7 @@ $('#input-note').on('focusout', (e) => {
   const value = e.target.value;
   const sceneNumber = $('#sceneNumber')[0].outerText;
   const elementNumber = $('#elementNumber')[0].innerText;
-  let url = buildUrl('update-note', sceneNumber, elementNumber, 'no');
+  let url = buildUrl('update-note', sceneNumber, elementNumber);
   url = `${url}&val=${value}&caller=showreel`;
   window.location.href = url;
 });
@@ -96,7 +96,7 @@ $('.btn-gen').on('click', () => {
   const elementNumber = $('#elementNumber')[0].innerText;
   const sceneNumber = $('#sceneNumber')[0].outerText;
   const voice = $('#voice')[0].innerText;
-  let url = buildUrl('generate-single', sceneNumber, elementNumber, 'no');
+  let url = buildUrl('generate-single', sceneNumber, elementNumber);
   url = `${url}&voice=${voice}`;
   $('#message').show();
   window.location.href = url;
@@ -108,7 +108,7 @@ $('.btn-del').on('click', (e) => {
     const fileName = e.target.value;
     const sceneNumber = $('#sceneNumber')[0].innerText;
     const elementNumber = $('#elementNumber')[0].innerText;
-    let url = buildUrl('delete', sceneNumber, elementNumber, 'no');
+    let url = buildUrl('delete', sceneNumber, elementNumber);
     url = `${url}&fileName=${fileName}`;
     window.location.href = url;
   }
@@ -118,7 +118,7 @@ $('.btn-del').on('click', (e) => {
 $('.btn-change').on('click', () => {
   const sceneNumber = $('#sceneNumber')[0].innerText;
   const elementNumber = $('#elementNumber')[0].innerText;
-  let url = buildUrl('gallery', sceneNumber, elementNumber, 'no');
+  let url = buildUrl('gallery', sceneNumber, elementNumber);
   url = `${url}&caller=showreel`;
   window.location.href = url;
 });
@@ -131,4 +131,25 @@ $('#btn-show-characters').on('click', () => {
 $('#btn-hide-characters').on('click', () => {
   $('#character-handling').hide();
   $('#main').show();
+});
+
+$('.btn-delete-category').on('click', (e) => {
+  if (confirm('Are you sure you want to delete this category?')) {
+  const title = $('#filmTitle')[0].innerText;
+  const sceneNumber = $('#sceneNumber')[0].innerText;
+  const elementNumber = $('#elementNumber')[0].innerText;
+  let url = buildUrl('delete-category', sceneNumber, elementNumber);
+  const category = e.target.value;
+  window.location.href = `${url}&category=${category}&caller=showreel`;
+  };
+});
+
+$('#btn-add-category').on('click', () => {
+  const category = $('#input-category')[0].value;
+  if (category !== '') {
+    const sceneNumber = $('#sceneNumber')[0].innerText;
+    const elementNumber = $('#elementNumber')[0].innerText;
+    const url = buildUrl('add-category', sceneNumber, elementNumber);
+    window.location.href = `${url}&category=${category}&caller=showreel`;
+  }
 });

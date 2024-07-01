@@ -20,6 +20,7 @@ const deleteCategoryHandler = async (req, res) => {
     const sceneNumber = parsedUrl.query.sceneNumber;
     const elementNumber = parsedUrl.query.elementNumber;
     const category = parsedUrl.query.category;
+    const caller = parsedUrl.query.caller;
 
     // Fetch movie file information asynchronously
     const filmFoxFile = await getFile(`${title}/${title}.fff`);
@@ -35,8 +36,11 @@ const deleteCategoryHandler = async (req, res) => {
     // Write the updated file content back to the file
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
-    // Redirect to the categories page with updated query parameters
-    res.redirect(`/categories?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    if (caller === 'showreel') {
+      res.redirect(`/showreel?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    } else {
+      res.redirect(`/categories?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    }
   } catch (error) {
     // Log any errors that occur during file handling
     console.error(`Error handling category deletion: ${error.message}`);

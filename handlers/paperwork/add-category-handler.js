@@ -16,7 +16,7 @@ const addCategoryHandler = async (req, res) => {
 
     // Parsing URL parameters
     const u = url.parse(req.originalUrl, true);
-    const { title, sceneNumber, elementNumber, category } = u.query;
+    const { title, sceneNumber, elementNumber, category, caller } = u.query;
 
     // Retrieving filmFoxFile data
     const filmFoxFile = await getFile(`${title}/${title}.fff`);
@@ -41,8 +41,11 @@ const addCategoryHandler = async (req, res) => {
       await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
     }
 
-    // Redirecting to the categories page with updated parameters
-    res.redirect(`/categories?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    if (caller === 'showreel') {
+      res.redirect(`/showreel?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    } else {
+      res.redirect(`/categories?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
+    }
   } catch (error) {
     // Handling errors and sending a 500 Internal Server Error response
     console.error(`Error in addCategoryHandler: ${error}`);

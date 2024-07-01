@@ -82,6 +82,42 @@ const showreelHandler = async (req, res) => {
     const size = shotList.length - 1;
     const slug = script[sceneNumber][0].dialogue;
 
+    const categories = [];
+
+    breakdown[sceneNumber].forEach((category) => {
+      if (category.length === 1){
+        category.push['empty'];
+      }
+      categories.push(category);
+    });
+
+    const used = breakdown[0].map(b => [b[0], 'n']);
+
+    // Create a list to store scenes and their associated categories
+    const list = breakdown.reduce((acc, used, index) => {
+      const temp = [index];
+      used.forEach((c) => {
+        if (c.length > 1) {
+          temp.push(c);
+        }
+      });
+      if (temp.length > 1) {
+        acc.push(temp);
+      }
+      return acc;
+    }, []);
+
+    // Update used array based on the scenes and their associated categories
+    list.forEach((scene) => {
+      scene.forEach((s) => {
+        used.forEach((c) => {
+          if (c[0] === s[0]) {
+            c[1] = 'y';
+          }
+        });
+      });
+    });
+
     // Render the showreel page with relevant data
     res.render('showreel/showreel.njk', {
       showSlider: 'yes',
@@ -103,7 +139,7 @@ const showreelHandler = async (req, res) => {
       caller: 'showreel',
       msg: u.searchParams.get('msg'),
       voice,
-      breakdown: breakdown[sceneNumber],
+      categories,
       lines: shotList[sceneNumber].lines,
       shots,
       shotTypes,
@@ -114,6 +150,7 @@ const showreelHandler = async (req, res) => {
       note: shotList[sceneNumber].note,
       slug,
       size,
+      used,
     });
   } catch (error) {
     console.error(`Error in Showreel Handler: ${error.message}`);

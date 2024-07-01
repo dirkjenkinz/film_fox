@@ -25,6 +25,12 @@
   background: black;
 }
 
+#scroll-header {
+  background: purple;
+  border: double 2px gold;
+  padding: 2px;
+}
+
 .scene-breakdown-header {
   position: fixed;    /* Makes the header stay in place while scrolling */
   top: 90px;         /* Aligns the header at the top */
@@ -650,7 +656,9 @@ input[type=range][orient=vertical] {
   background-color: #f8f9fa; /* Adjust as needed */
 }
 
-.breakdown-box {
-  background: rgb(51, 97, 215);
-  border: double 3px white;
+.categories-box {
+  background: white;
+  border: double 3px black;
+  color: black;
+  font-size: '50%';
 }

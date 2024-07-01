@@ -14,7 +14,6 @@ $('#btn-shot-spreadsheets').on('click', () => {
 });
 
 $('#btn-shot-pdfs').on('click', () => {
-  console.log('@@@@')
   const title = $('#filmTitle')[0].innerText;
   window.location.href = `/generate-shot-pdfs?title=${title}`;
 });
