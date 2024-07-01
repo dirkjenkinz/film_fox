@@ -16,26 +16,31 @@ const deleteCategoryHandler = async (req, res) => {
 
     // Parse query parameters from the request URL
     const parsedUrl = url.parse(req.url, true);
-    const title = parsedUrl.query.title;
-    const sceneNumber = parsedUrl.query.sceneNumber;
-    const elementNumber = parsedUrl.query.elementNumber;
-    const category = parsedUrl.query.category;
-    const caller = parsedUrl.query.caller;
+    const { title, sceneNumber, elementNumber, category, caller } = parsedUrl.query;
+
+    if (!title || !sceneNumber || !elementNumber || !category || !caller) {
+      return res.status(400).send('Bad Request: Missing required query parameters');
+    }
 
     // Fetch movie file information asynchronously
     const filmFoxFile = await getFile(`${title}/${title}.fff`);
+
+    if (!filmFoxFile) {
+      return res.status(404).send('Not Found: Film file does not exist');
+    }
 
     // Ensure breakdown property exists or initialize it as an empty array
     filmFoxFile.breakdown = filmFoxFile.breakdown || [];
 
     // Filter out the specified category from each breakdown entry
-    filmFoxFile.breakdown = filmFoxFile.breakdown.map(categories => {
-      return categories.filter(categoryItem => categoryItem[0] !== category);
-    });
+    filmFoxFile.breakdown = filmFoxFile.breakdown.map((categories) =>
+      categories.filter((categoryItem) => categoryItem[0] !== category)
+    );
 
     // Write the updated file content back to the file
     await writeFile(JSON.stringify(filmFoxFile), `${title}/${title}.fff`);
 
+    // Redirect based on the caller query parameter
     if (caller === 'showreel') {
       res.redirect(`/showreel?title=${title}&elementNumber=${elementNumber}&sceneNumber=${sceneNumber}`);
     } else {

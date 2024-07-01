@@ -17,7 +17,7 @@ $('.btn-delete-category').on('click', (e) => {
     const title = $('#filmTitle')[0].innerText;
   const category = e.target.value;
   const url = buildUrl('delete-category', '', '');
-  window.location.href = element ? `${url}&category=${category}` : url;
+  window.location.href = element ? `${url}&category=${category}&caller=categories` : url;
   };
 });
 
@@ -25,7 +25,7 @@ $('#btn-add-category').on('click', () => {
   const category = $('#input-category')[0].value;
   if (category !== '') {
     const url = buildUrl('add-category', '', '');
-    window.location.href = `${url}&category=${category}`;
+    window.location.href = `${url}&category=${category}&caller=categories`;
   }
 });
 
